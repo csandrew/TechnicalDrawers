@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    @apply bg-white text-gray-800;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform cursor-pointer border-none;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-custom-hover;
+  }
+  .btn-whatsapp {
+    @apply bg-whatsapp text-white hover:bg-whatsapp-hover;
+  }
+  .btn-whatsapp:hover {
+    @apply -translate-y-0.5 shadow-lg;
+  }
+  .btn-outline {
+    @apply bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white;
+  }
+}
+
+/* Prevent horizontal scroll */
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+img, video, canvas {
+    max-width: 100%;
+}
+
+/* Container fix */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+    .container {
+        padding: 0 24px;
+    }
+}
