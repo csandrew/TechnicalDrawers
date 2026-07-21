@@ -1,81 +1,105 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
 
 const Footer = () => {
     return (
-        <footer className="bg-primary text-gray-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div>
-                        <div className="flex items-center gap-3">
-                            <img src="/logo.png" alt="Technical Drawers" className="h-10 w-auto" />
-                            <span className="text-lg font-semibold">Technical<span className="text-golden">Drawers</span></span>
+        <footer className="bg-primary text-white py-12">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-[auto_auto_auto_auto] gap-8 md:gap-12">
+                    
+                    {/* Brand - Takes only what it needs */}
+                    <div className="w-auto">
+                        <div className="flex items-center gap-3 mb-4">
+                            <img src="/logo.png" alt="Technical Drawers" className="h-10" />
+                            <span className="font-extrabold text-xl">
+                                Technical <span className="text-accent">Drawers</span>
+                            </span>
                         </div>
-                        <p className="mt-4 text-sm text-gray-200 mb-5">Equipping Kenya's next generation of professionals.</p>
-                        <div className="flex items-center gap-4">
+                        <p className="text-gray-400 text-sm max-w-xs">
+                            Equipping Kenya's next generation of STEM professionals.
+                        </p>
+                        
+                        {/* Social Media Icons */}
+                        <div className="flex items-center gap-3 mt-5">
+                            {/* Instagram - Gradient */}
                             <a
                                 href="#"
                                 aria-label="Instagram"
-                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110 bg-instagram"
+                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                                style={{ background: 'radial-gradient(circle at 30% 110%, #ffdb70, #e4405f, #c13584, #833ab4, #5851db)' }}
                             >
-                                <i className="fab fa-instagram text-white text-lg"></i>
+                                <i className="fab fa-instagram text-white text-sm"></i>
                             </a>
+
+                            {/* Facebook - Official Blue */}
                             <a
                                 href="#"
                                 aria-label="Facebook"
-                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110 bg-facebook"
+                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                                style={{ background: '#1877F2' }}
                             >
-                                <i className="fab fa-facebook-f text-white text-lg"></i>
+                                <i className="fab fa-facebook-f text-white text-sm"></i>
                             </a>
-                            <a
-                                href="#"
-                                aria-label="Twitter"
-                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110 bg-twitter"
-                            >
-                                <i className="fab fa-twitter text-white text-lg"></i>
-                            </a>
+
+                            {/* TikTok - Black */}
                             <a
                                 href="#"
                                 aria-label="TikTok"
-                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110 bg-tiktok"
+                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                                style={{ background: '#000000' }}
                             >
-                                <i className="fab fa-tiktok text-white text-lg"></i>
+                                <i className="fab fa-tiktok text-white text-sm"></i>
                             </a>
+
+                            {/* YouTube - Red */}
                             <a
                                 href="#"
                                 aria-label="YouTube"
-                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110 bg-youtube"
+                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                                style={{ background: '#FF0000' }}
                             >
-                                <i className="fab fa-youtube text-white text-lg"></i>
+                                <i className="fab fa-youtube text-white text-sm"></i>
                             </a>
                         </div>
                     </div>
 
-                    <div>
-                        <h4 className="font-semibold mb-4">Quick Links</h4>
-                        <ul className="space-y-2 text-sm">
-                            <li><Link to="/" className="hover:text-golden">Home</Link></li>
-                            <li><Link to="/products" className="hover:text-golden">Products</Link></li>
-                            <li><Link to="/about" className="hover:text-golden">About Us</Link></li>
-                            <li><Link to="/contact" className="hover:text-golden">Contact Us</Link></li>
+                    {/* Quick Links - Takes only what it needs */}
+                    <div className="w-auto">
+                        <h4 className="font-bold text-lg mb-4">Quick Links</h4>
+                        <ul className="space-y-2">
+                            <li><Link to="/" className="text-gray-400 hover:text-accent transition">Home</Link></li>
+                            <li><Link to="/products" className="text-gray-400 hover:text-accent transition">Products</Link></li>
+                            <li><Link to="/about" className="text-gray-400 hover:text-accent transition">About Us</Link></li>
+                            <li><Link to="/contact" className="text-gray-400 hover:text-accent transition">Contact Us</Link></li>
                         </ul>
                     </div>
 
-                    <div>
-                        <h4 className="font-semibold mb-4">Contact</h4>
-                        <ul className="space-y-3 text-sm text-gray-200">
-                            <li className="flex items-start gap-2"><i className="fas fa-map-marker-alt mt-1"></i><span>Haile Selassie Avenue, Nairobi</span></li>
-                            <li className="flex items-start gap-2"><i className="fas fa-envelope mt-1"></i><a href="mailto:info@technicaldrawers.co.ke" className="hover:text-golden">info@technicaldrawers.co.ke</a></li>
-                            <li className="flex items-start gap-2"><i className="fas fa-phone-alt mt-1"></i><a href="tel:+254700000000" className="hover:text-golden">+254 700 000 000</a></li>
+                    {/* Contact - Takes only what it needs */}
+                    <div className="w-auto">
+                        <h4 className="font-bold text-lg mb-4">Contact</h4>
+                        <ul className="space-y-2">
+                            <li className="flex items-center gap-2 text-gray-400">
+                                <i className="fas fa-map-marker-alt text-gray-400"></i>
+                                Haile Selassie Ave, Nairobi
+                            </li>
+                            <li className="flex items-center gap-2 text-gray-400">
+                                <i className="fas fa-envelope text-gray-400"></i>
+                                <a href="mailto:info@technicaldrawers.co.ke" className="hover:text-accent transition">info@technicaldrawers.co.ke</a>
+                            </li>
+                            <li className="flex items-center gap-2 text-gray-400">
+                                <i className="fas fa-phone-alt text-gray-400"></i>
+                                <a href="tel:+254700000000" className="hover:text-accent transition">+254 700 000 000</a>
+                            </li>
                         </ul>
                     </div>
 
-                    <div>
-                        <h4 className="font-semibold mb-4">Stay in the loop</h4>
-                        <p className="text-sm text-gray-200">We'll let you know when new stock arrives.</p>
-                        <form
-                            className="mt-4 flex gap-2"
+                    {/* Newsletter - Takes only what it needs */}
+                    <div className="w-auto">
+                        <h4 className="font-bold text-lg mb-4">Stay in the loop</h4>
+                        <p className="text-gray-400 text-sm mb-4">We'll let you know when new stock arrives.</p>
+                        <form 
+                            className="flex flex-col sm:flex-row gap-2"
                             onSubmit={(e) => {
                                 e.preventDefault();
                                 const email = e.target.querySelector('input').value;
@@ -85,23 +109,31 @@ const Footer = () => {
                                         '_blank'
                                     );
                                     e.target.querySelector('input').value = '';
-                                    toast.success('Check your WhatsApp!');
                                 }
                             }}
                         >
-                            <input type="email" placeholder="Your email address" required className="flex-1 px-3 py-2 border rounded bg-white text-gray-800" />
-                            <button type="submit" className="bg-accent text-primary px-4 rounded hover:bg-accent-hover">
+                            <input 
+                                type="email" 
+                                placeholder="Your email" 
+                                className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-gray-400 border border-white/10 focus:outline-none focus:border-accent"
+                                required 
+                            />
+                            <button 
+                                type="submit" 
+                                className="bg-accent hover:bg-accent-hover text-primary font-bold px-4 py-2 rounded-lg transition whitespace-nowrap"
+                            >
                                 <i className="fas fa-paper-plane"></i>
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <div className="mt-8 border-t pt-6 flex flex-col md:flex-row items-center justify-between text-sm">
+                {/* Bottom */}
+                <div className="border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
                     <p>&copy; 2026 Technical Drawers. All rights reserved.</p>
-                    <div className="flex gap-4 mt-4 md:mt-0">
-                        <Link to="/privacy-policy" className="hover:text-golden">Privacy Policy</Link>
-                        <Link to="/terms-conditions" className="hover:text-golden">Terms & Conditions</Link>
+                    <div className="flex gap-6">
+                        <Link to="/privacy-policy" className="hover:text-accent transition">Privacy Policy</Link>
+                        <Link to="/terms-conditions" className="hover:text-accent transition">Terms & Conditions</Link>
                     </div>
                 </div>
             </div>

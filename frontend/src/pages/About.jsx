@@ -5,7 +5,7 @@ const About = () => {
         <section className="py-12 bg-slate-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-6">
-                    <h1 className="text-2xl font-extrabold">About Us</h1>
+                    <h1 className="text-2xl font-extrabold text-secondary">About Us</h1>
                     <p className="text-sm text-gray-600">Equipping Kenya's next generation of professionals</p>
                 </div>
 
@@ -15,23 +15,23 @@ const About = () => {
                         <p className="mt-4 text-gray-600">Technical Drawers started when we realized students in Nairobi were struggling to find quality equipment. We know exactly what you need because we've been in your seat.</p>
                         <p className="mt-2 text-gray-600">We aim to reach over <strong>10,000 students</strong> and professionals across Kenya with genuine products at student-friendly prices.</p>
 
-                        <div className="mt-6 space-y-4 bg-gray-300 p-6 rounded shadow">
+                        <div className="mt-6 space-y-4 bg-slate-300 p-6 rounded shadow">
                             <div className="flex items-start gap-3">
-                                <i className="fas fa-check-circle text-2xl text-accent" />
+                                <i className="fas fa-check-circle text-2xl text-secondary" />
                                 <div>
                                     <strong>Genuine products</strong>
                                     <p className="text-sm text-gray-600">No counterfeits. Only trusted brands.</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
-                                <i className="fas fa-coins text-2xl text-accent" />
+                                <i className="fas fa-coins text-2xl text-secondary" />
                                 <div>
                                     <strong>Student-friendly pricing</strong>
                                     <p className="text-sm text-gray-600">We know your budget is tight. We keep prices fair.</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
-                                <i className="fas fa-boxes text-2xl text-accent" />
+                                <i className="fas fa-boxes text-2xl text-secondary" />
                                 <div>
                                     <strong>Bulk & institutional orders</strong>
                                     <p className="text-sm text-gray-600">We supply universities, colleges, and training centers.</p>

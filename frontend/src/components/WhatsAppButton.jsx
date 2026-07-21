@@ -16,7 +16,7 @@ const WhatsAppButton = () => {
         >
             <i className="fab fa-whatsapp text-2xl"></i>
             <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs group-hover:pl-1 transition-all duration-300 font-medium text-sm">
-                Chat on WhatsApp
+                WhatsApp Us
             </span>
         </a>
     );

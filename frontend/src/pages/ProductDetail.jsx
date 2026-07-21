@@ -41,7 +41,7 @@ const ProductDetail = () => {
     if (!product) {
         return (
             <div className="container mx-auto px-4 py-16 text-center">
-                <h2 className="text-2xl font-bold text-primary">Product not found</h2>
+                <h2 className="text-2xl font-bold text-secondary">Product not found</h2>
                 <Link to="/products" className="btn btn-primary mt-4 inline-block">Back to Products</Link>
             </div>
         );

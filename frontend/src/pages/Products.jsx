@@ -2,29 +2,72 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { getProductsByCategory, fetchProducts } from '../data/products';
+import ProductCard from '../components/ProductCard';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
     const [searchParams] = useSearchParams();
     const { addToCart } = useCart();
     const categoryFilter = searchParams.get('category');
 
+    const categories = [
+        'All',
+        'Engineering & Drawing',
+        'Scientific Calculators',
+        'Mathematics Equipment',
+        'Writing Instruments',
+        'Notebooks & Books',
+        'Filing & Organization',
+        'Laboratory Supplies',
+        'Safety Equipment',
+        'Exam Essentials',
+        'Gifts & Accessories'
+    ];
+
     useEffect(() => {
         const loadProducts = async () => {
             let data;
-            if (categoryFilter) {
+            if (categoryFilter && categoryFilter !== 'All') {
                 data = await getProductsByCategory(categoryFilter);
             } else {
                 data = await fetchProducts();
             }
             setProducts(data);
+            setFilteredProducts(data);
             setLoading(false);
         };
         loadProducts();
     }, [categoryFilter]);
 
-    const categories = ['All', 'Calculators', 'Drawing Tools', 'Lab Safety', 'Stationery', 'Books', 'Footwear'];
+    // Search filter effect
+    useEffect(() => {
+        if (searchTerm.trim() === '') {
+            setFilteredProducts(products);
+        } else {
+            const filtered = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.category.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setFilteredProducts(filtered);
+        }
+    }, [searchTerm, products]);
+
+    // Add to the useEffect
+useEffect(() => {
+    const searchQuery = searchParams.get('search');
+    if (searchQuery) {
+        setSearchTerm(searchQuery);
+    }
+}, [searchParams]);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        // Search is handled by the useEffect above
+    };
 
     if (loading) {
         return (
@@ -38,11 +81,36 @@ const Products = () => {
     }
 
     return (
-        <section className="py-16 bg-slate-50">
+        <section className="py-16 bg-slate-100">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
-                    <h1 className="text-2xl md:text-4xl font-extrabold text-primary">Our Products</h1>
+                    
+                    <h1 className="text-2xl md:text-2xl font-extrabold text-secondary">Our Products</h1>
                     <p className="text-text-light mt-2">Quality equipment for Kenya's future professionals</p>
+                </div>
+
+                {/* Search Bar - Added to Products Page */}
+                <div className="max-w-2xl mx-auto mb-8">
+                    <form onSubmit={handleSearch} className="relative w-full">
+                        <input
+                            type="text"
+                            placeholder="Search products by name, category, or description..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full h-12 px-4 pr-12 bg-white rounded-lg outline-none focus:ring-2 focus:ring-accent/50 transition shadow-sm"
+                        />
+                        <button 
+                            type="submit"
+                            className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center text-gray-500 hover:text-primary-dark transition"
+                        >
+                            <i className="fas fa-search text-xl"></i>
+                        </button>
+                    </form>
+                    {searchTerm && (
+                        <p className="text-sm text-gray-500 mt-2">
+                            Found {filteredProducts.length} result{filteredProducts.length !== 1 ? 's' : ''}
+                        </p>
+                    )}
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-2 mb-8">
@@ -61,26 +129,20 @@ const Products = () => {
                     ))}
                 </div>
 
-                {products.length === 0 ? (
+                {filteredProducts.length === 0 ? (
                     <div className="text-center py-12">
-                        <p className="text-gray-600">No products found in this category.</p>
-                        <Link to="/products" className="btn btn-primary mt-4 inline-block">View All Products</Link>
+                        <p className="text-gray-600">No products found matching "{searchTerm}".</p>
+                        <button 
+                            onClick={() => setSearchTerm('')}
+                            className="btn btn-primary mt-4 inline-block"
+                        >
+                            Clear Search
+                        </button>
                     </div>
                 ) : (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                        {products.map(product => (
-                            <div key={product._id} className="bg-white rounded-custom p-4 shadow-custom hover:shadow-custom-hover transition-all hover:-translate-y-1">
-                                <Link to={`/product/${product._id}`}>
-                                    <div className="aspect-square bg-slate-100 rounded-lg overflow-hidden mb-3">
-                                        <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
-                                    </div>
-                                    <h3 className="font-semibold text-primary text-sm md:text-base">{product.name}</h3>
-                                    <p className="text-accent font-bold">KES {product.price.toLocaleString()}</p>
-                                </Link>
-                                <button className="w-full mt-3 bg-primary text-white py-2.5 rounded-lg font-semibold hover:bg-primary-dark transition flex items-center justify-center gap-2" onClick={() => addToCart(product)}>
-                                    <i className="fas fa-shopping-cart"></i> Add to Cart
-                                </button>
-                            </div>
+                        {filteredProducts.map(product => (
+                            <ProductCard key={product._id} product={product} />
                         ))}
                     </div>
                 )}
