@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -11,57 +10,65 @@ const Home = () => {
     const [activeSlide, setActiveSlide] = useState(0);
     const { addToCart } = useCart();
 
+    const courses = [
+        { name: 'Aeronautical Engineering', icon: 'fa-plane' },
+        { name: 'Civil Engineering', icon: 'fa-building' },
+        { name: 'Chemical & Petroleum Engineering', icon: 'fa-flask' },
+        { name: 'Geospatial Engineering', icon: 'fa-globe-africa' },
+        { name: 'Mechanical Engineering', icon: 'fa-cogs' },
+        { name: 'Automotive Engineering', icon: 'fa-car' },
+        { name: 'Mechatronics Engineering', icon: 'fa-microchip' },
+        { name: 'Quantity Survey', icon: 'fa-ruler-combined' },
+        { name: 'Building Construction Technology', icon: 'fa-hard-hat' },
+        { name: 'Construction Management', icon: 'fa-clipboard-list' },
+        { name: 'Urban & Regional Planning', icon: 'fa-city' },
+        { name: 'Architecture & Architectural Studies ', icon: 'fa-drafting-compass' }
+
+    ];
+
     const slides = [
         {
             id: 0,
-            title: 'New Arrivals',
-            subtitle: 'Discover Our Latest Collection',
+            title: 'DRAWING SET',
+            subtitle: 'Essential Tools for Every Engineer',
             bgColor: 'from-blue-900 to-indigo-700',
             buttonText: 'Shop Now →',
             buttonLink: '/products',
-            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784550233/drawingset_kqba5n.jpg',
+            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784696201/drawingset-removebg-preview_itjg1i.png',
             features: [
-                { name: 'Modern Style', price: 'KES 3,500' },
-                { name: 'Elegant Series', price: 'KES 3,000' }
+                { name: '9-Piece Complete Set', price: 'KES 1,200' },
+                { name: 'Precision Compass & Divider', price: 'Included' }
             ],
-            description: 'Discover our latest collection of technical equipment for STEM students. Quality tools for the next generation of professionals.',
-           
+            description: 'Every engineering student needs a reliable drawing set. Our 9-piece collection includes everything from compass to pencil holder.'
         },
         {
             id: 1,
-            title: 'Limited Time',
-            subtitle: 'Season Sale Best Deals',
+            title: 'SAFETY BOOTS',
+            subtitle: 'Protect Your Feet, Protect Your Future',
             bgColor: 'from-red-900 to-orange-700',
             buttonText: 'Shop Now →',
             buttonLink: '/products',
-            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784550273/soldier-safety-boots_vysocg.jpg',
+            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784695848/soldier-safety-boots-removebg-preview_ia52mn.png',
             features: [
-                { name: 'Premium Materials', icon: 'fa-gem' },
-                { name: 'Durable Safety Boots', price: 'KES 3,000' }
-                
+                { name: 'Steel Toe Protection', salePrice: 'KES 2,250' },
+                { name: 'Anti-Slip Sole', price: 'Safety First' }
             ],
-            description: 'Don\'t miss out on our biggest sale of the season. Get up to 50% off on selected items for a limited time.',
-            timer: true,
-            testimonial: {
-                quote: 'Exceptional quality and design',
-                author: 'Satisfied Customer'
-            }
+            description: 'Lab sessions and workshops demand proper protection. Our steel-toe safety boots keep you safe while you learn.',
+            timer: true
         },
         {
             id: 2,
-            title: 'Featured Collection',
-            subtitle: 'Premium Quality Products',
+            title: 'LAB COATS',
+            subtitle: 'Professional Quality for Lab Sessions',
             bgColor: 'from-purple-900 to-pink-700',
-            buttonText: 'Explore Collection →',
+            buttonText: 'Shop Now →',
             buttonLink: '/products',
-            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784483314/fx991esplus_n7gacz.png',
+            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784695847/assorted-dustcoat-removebg-preview_k8tc4t.png',
             features: [
-                { name: 'Premium Materials', icon: 'fa-gem' },
-                { name: 'Advanced Technology', icon: 'fa-microchip' }
-                
+                { name: '100% Comfort', icon: 'fa-gem' },
+                { name: 'Durable & Washable', icon: 'fa-shield-alt' }
             ],
-            description: 'Explore our featured collection of premium technical equipment. Handpicked for quality and durability.',
-           
+            description: 'Look professional, stay comfortable. Our lab coats are perfect for long practical sessions. Available in multiple sizes for the perfect fit.'
         }
     ];
 
@@ -99,11 +106,10 @@ const Home = () => {
                 {slides.map((slide, index) => (
                     <div
                         key={slide.id}
-                        className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-                            index === activeSlide 
-                                ? 'opacity-100 translate-x-0' 
+                        className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === activeSlide
+                                ? 'opacity-100 translate-x-0'
                                 : 'opacity-0 translate-x-full'
-                        }`}
+                            }`}
                         style={{
                             transform: index === activeSlide ? 'translateX(0)' : 'translateX(100%)',
                             opacity: index === activeSlide ? 1 : 0,
@@ -113,7 +119,6 @@ const Home = () => {
                         <div className={`w-full h-full bg-gradient-to-br ${slide.bgColor} flex items-center overflow-y-auto`}>
                             <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
                                 <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
-                                    {/* Left Content - Text */}
                                     <div className="text-white order-1 md:order-1">
                                         <span className="inline-block text-xs md:text-sm font-semibold uppercase tracking-wider bg-white/20 px-3 md:px-4 py-1 rounded-full mb-3 md:mb-4">
                                             {slide.title}
@@ -132,7 +137,6 @@ const Home = () => {
                                             {slide.buttonText}
                                         </Link>
 
-                                        {/* Features Grid */}
                                         <div className="grid grid-cols-2 gap-2 md:gap-3 mt-4 md:mt-6">
                                             {slide.features.map((item, i) => (
                                                 <div key={i} className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 md:px-4 md:py-3">
@@ -161,20 +165,13 @@ const Home = () => {
                                         </div>
                                     </div>
 
-                                    {/* Right Content - Image */}
                                     <div className="flex items-center justify-center order-2 md:order-2">
                                         <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[420px]">
-                                            <img 
-                                                src={slide.image} 
+                                            <img
+                                                src={slide.image}
                                                 alt={slide.title}
-                                                className="w-full h-auto rounded-xl md:rounded-2xl shadow-2xl border border-white/20"
+                                                className="w-full h-auto rounded-xl md:rounded-2xl shadow-2xl"
                                             />
-                                            {slide.testimonial && (
-                                                <div className="mt-3 md:mt-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 md:p-4 text-center">
-                                                    <p className="text-white text-xs md:text-sm italic">"{slide.testimonial.quote}"</p>
-                                                    <p className="text-white/70 text-[10px] md:text-xs">— {slide.testimonial.author}</p>
-                                                </div>
-                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -183,20 +180,48 @@ const Home = () => {
                     </div>
                 ))}
 
-                {/* Dots Navigation */}
                 <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 z-20">
                     {slides.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => setActiveSlide(index)}
-                            className={`h-2 md:h-3 rounded-full transition-all duration-300 ${
-                                index === activeSlide 
-                                    ? 'bg-white w-6 md:w-8' 
+                            className={`h-2 md:h-3 rounded-full transition-all duration-300 ${index === activeSlide
+                                    ? 'bg-white w-6 md:w-8'
                                     : 'bg-white/40 hover:bg-white/60 w-2 md:w-3'
-                            }`}
+                                }`}
                             aria-label={`Go to slide ${index + 1}`}
                         />
                     ))}
+                </div>
+            </section>
+
+            {/* Shop by Course Section */}
+            <section className="py-16 bg-white">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-2xl md:text-2xl font-extrabold text-secondary mb-4 ">
+                            Shop by Your Course
+                        </h2>
+                        <p className="text-text-light mt-2 max-w-2xl mx-auto">
+                            Find exactly what you need for your studies. Browse equipment and supplies recommended for your course of study.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
+                        {courses.map((course) => (
+                            <Link
+                                key={course.name}
+                                to={`/products?course=${encodeURIComponent(course.name)}`}
+                                className="bg-slate-100 hover:bg-slate-200 rounded-xl p-6 text-center transition-all hover:scale-105 hover:shadow-lg group"
+                            >
+                                <div className="text-4xl text-primary mb-3 group-hover:scale-110 transition-transform">
+                                    <i className={`fas ${course.icon}`}></i>
+                                </div>
+                                <h3 className="font-semibold text-primary text-sm md:text-base">
+                                    {course.name}
+                                </h3>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </section>
 
@@ -204,8 +229,8 @@ const Home = () => {
             <section className="py-12 md:py-16 bg-slate-200">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-8 md:mb-12">
-                        <h2 className="text-xl md:text-2xl lg:text-4xl font-extrabold text-primary mt-3">
-                            What students are buying
+                        <h2 className="text-xl md:text-2xl lg:text-2xl font-extrabold text-secondary mb-4">
+                            Explore Products
                         </h2>
                         <p className="text-text-light text-sm md:text-base mt-2">
                             Trusted by STEM students at all major institutions of higher learning
@@ -217,8 +242,8 @@ const Home = () => {
                         ))}
                     </div>
                     <div className="text-center mt-6 md:mt-8">
-                        <Link 
-                            to="/products" 
+                        <Link
+                            to="/products"
                             className="btn btn-outline bg-white text-primary hover:bg-primary hover:text-white transition text-sm md:text-base"
                         >
                             View All Products <i className="fas fa-arrow-right ml-2"></i>

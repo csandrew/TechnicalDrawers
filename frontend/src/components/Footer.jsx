@@ -24,7 +24,8 @@ const Footer = () => {
                         <div className="flex items-center gap-3 mt-5">
                             {/* Instagram - Gradient */}
                             <a
-                                href="#"
+                                href=" https://www.instagram.com/technicaldrawers?igsh=MWlvbW9oenhtaXg2aQ== "
+                                target="_blank"
                                 aria-label="Instagram"
                                 className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
                                 style={{ background: 'radial-gradient(circle at 30% 110%, #ffdb70, #e4405f, #c13584, #833ab4, #5851db)' }}
@@ -34,7 +35,8 @@ const Footer = () => {
 
                             {/* Facebook - Official Blue */}
                             <a
-                                href="#"
+                                href="https://www.facebook.com/share/1DN8YCYcr9/"
+                                target="_blank"
                                 aria-label="Facebook"
                                 className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
                                 style={{ background: '#1877F2' }}
@@ -52,15 +54,6 @@ const Footer = () => {
                                 <i className="fab fa-tiktok text-white text-sm"></i>
                             </a>
 
-                            {/* YouTube - Red */}
-                            <a
-                                href="#"
-                                aria-label="YouTube"
-                                className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
-                                style={{ background: '#FF0000' }}
-                            >
-                                <i className="fab fa-youtube text-white text-sm"></i>
-                            </a>
                         </div>
                     </div>
 
@@ -70,6 +63,7 @@ const Footer = () => {
                         <ul className="space-y-2">
                             <li><Link to="/" className="text-gray-400 hover:text-accent transition">Home</Link></li>
                             <li><Link to="/products" className="text-gray-400 hover:text-accent transition">Products</Link></li>
+                            <li><Link to="/blog" className="text-gray-400 hover:text-accent transition">Our Blog</Link></li>
                             <li><Link to="/about" className="text-gray-400 hover:text-accent transition">About Us</Link></li>
                             <li><Link to="/contact" className="text-gray-400 hover:text-accent transition">Contact Us</Link></li>
                         </ul>

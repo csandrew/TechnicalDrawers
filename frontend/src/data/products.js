@@ -42,3 +42,14 @@ export const getProductsByCategory = async (category) => {
         return [];
     }
 };
+
+export const getProductsByCourse = async (course) => {
+    try {
+        const response = await axios.get(`${API_URL}/api/products`);
+        const products = response.data;
+        return products.filter(p => p.courses && p.courses.includes(course));
+    } catch (error) {
+        console.error('Error fetching products by course:', error);
+        return [];
+    }
+};

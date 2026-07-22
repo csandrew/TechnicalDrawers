@@ -2,7 +2,7 @@
 import React from 'react';
 
 const WhatsAppButton = () => {
-    const phoneNumber = '254700000000';
+    const phoneNumber = '254795011225';
     const message = 'Hello Technical Drawers,%0A%0AI have a question about your products. Can you help me?';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 

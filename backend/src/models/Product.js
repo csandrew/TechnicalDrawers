@@ -8,16 +8,14 @@ const productSchema = new mongoose.Schema({
     category: {
         type: String,
         enum: [
-            'Engineering & Drawing',
             'Scientific Calculators',
-            'Mathematics Equipment',
+            'Engineering & Drawing',
             'Writing Instruments',
             'Notebooks & Books',
-            'Filing & Organization',
             'Laboratory Supplies',
             'Safety Equipment',
-            'Exam Essentials',
-            'Gifts & Accessories'
+            'Mathematics Equipment',
+            'Exam Essentials'
         ],
         required: true
     },
@@ -25,6 +23,7 @@ const productSchema = new mongoose.Schema({
     stock: { type: Number, required: true, default: 0 },
     featured: { type: Boolean, default: false },
     tags: [String],
+    courses: [{ type: String }],
     specifications: { type: Map, of: String },
     createdAt: { type: Date, default: Date.now }
 });

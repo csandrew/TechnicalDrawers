@@ -23,7 +23,7 @@ const Header = () => {
                 <Link to="/" className="flex items-center gap-2 flex-shrink-0">
                     <img src="/logo.png" alt="Technical Drawers" className="h-10 md:h-12 w-auto" />
                     <span className="text-lg md:text-xl font-bold hidden sm:inline">
-                        Technical<span className="text-secondary">Drawers</span>
+                        Technical<span className="text-accent">Drawers</span>
                     </span>
                 </Link>
 
@@ -33,7 +33,7 @@ const Header = () => {
                         <input
                             type="text"
                             placeholder="Search products..."
-                            className="w-full h-12 px-4 pr-12 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-accent/200 transition"
+                            className="w-full h-12 px-4 pr-12 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-secondary transition"
                         />
                         <button
                             type="submit"
@@ -64,7 +64,7 @@ const Header = () => {
                     <input
                         type="text"
                         placeholder="Search products..."
-                        className="w-full h-10 px-4 pr-10 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-accent/50 transition text-sm"
+                        className="w-full h-10 px-4 pr-10 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-secondary transition text-sm"
                     />
                     <button
                         type="submit"
@@ -102,7 +102,7 @@ const Header = () => {
                             `}
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            HOME
+                            Home
                         </NavLink>
                     </li>
                     <li className="w-full md:w-auto border-b md:border-b-0 border-gray-100">
@@ -115,7 +115,7 @@ const Header = () => {
                             `}
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            PRODUCTS
+                            Products
                         </NavLink>
                     </li>
                     <li className="w-full md:w-auto border-b md:border-b-0 border-gray-100">
@@ -128,7 +128,7 @@ const Header = () => {
                             `}
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            GUIDES
+                            Our Blog
                         </NavLink>
                     </li>
                     <li className="w-full md:w-auto border-b md:border-b-0 border-gray-100">
@@ -141,7 +141,7 @@ const Header = () => {
                             `}
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            ABOUT US
+                            About Us
                         </NavLink>
                     </li>
                     <li className="w-full md:w-auto">
@@ -154,7 +154,7 @@ const Header = () => {
                             `}
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            CONTACT US
+                            Contact Us
                         </NavLink>
                     </li>
                 </ul>

@@ -5,8 +5,8 @@ const About = () => {
         <section className="py-12 bg-slate-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-6">
-                    <h1 className="text-2xl font-extrabold text-secondary">About Us</h1>
-                    <p className="text-sm text-gray-600">Equipping Kenya's next generation of professionals</p>
+                    <h1 className="text-2xl font-extrabold text-secondary mb-4">About Us</h1>
+                    <p className="text-sm text-gray-600">Equipping Kenya's next generation of STEM professionals</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -56,7 +56,7 @@ const About = () => {
                     </div>
                     <div>
                         <div className="text-2xl font-bold">100%</div>
-                        <div className="text-sm text-gray-600">Genuine Products</div>
+                        <div className="text-sm text-gray-600">Quality Services</div>
                     </div>
                     
                 </div>

@@ -36,7 +36,7 @@ ${formData.message}`;
         <section className="py-12 bg-slate-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-6">
-                    <h1 className="text-2xl font-extrabold text-secondary">Contact Us</h1>
+                    <h1 className="text-2xl font-extrabold text-secondary mb-4">Contact Us</h1>
                     <p className="text-sm text-gray-600">We're actually helpful. Have a question? Talk to us.</p>
                 </div>
 

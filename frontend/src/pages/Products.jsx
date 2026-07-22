@@ -1,72 +1,115 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { getProductsByCategory, fetchProducts } from '../data/products';
+import { fetchProducts } from '../data/products';
 import ProductCard from '../components/ProductCard';
 
 const Products = () => {
-    const [products, setProducts] = useState([]);
+    const [allProducts, setAllProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const { addToCart } = useCart();
-    const categoryFilter = searchParams.get('category');
+    
+    // Pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 12;
+    
+    // Mobile expand state
+    const [showAllCourses, setShowAllCourses] = useState(false);
+    const [showAllCategories, setShowAllCategories] = useState(false);
+    
+    // Get filters from URL
+    const categoryFilter = searchParams.get('category') || 'All';
+    const courseFilter = searchParams.get('course') || 'All Courses';
 
-    const categories = [
+    // Course list
+    const allCourses = [
+        'All Courses',
+        'Aeronautical Engineering',
+        'Civil Engineering',
+        'Chemical & Petroleum Engineering',
+        'Geospatial Engineering',
+        'Mechanical Engineering',
+        'Automotive Engineering',
+        'Electrical & Electronics Engineering',
+        'Mechatronics Engineering',
+        'Quantity Survey',
+        'Building Construction Technology',
+        'Construction Management',
+        'Urban & Regional Planning',
+        'Architecture & Architectural Studies'
+    ];
+
+    const allCategories = [
         'All',
-        'Engineering & Drawing',
         'Scientific Calculators',
-        'Mathematics Equipment',
+        'Engineering & Drawing',
         'Writing Instruments',
         'Notebooks & Books',
-        'Filing & Organization',
         'Laboratory Supplies',
         'Safety Equipment',
-        'Exam Essentials',
-        'Gifts & Accessories'
+        'Mathematics Equipment',
+        'Exam Essentials'
     ];
+
+    // Show only first 4 on mobile unless expanded
+    const getVisibleCourses = () => {
+        if (showAllCourses) return allCourses;
+        return allCourses.slice(0, 5);
+    };
+
+    const getVisibleCategories = () => {
+        if (showAllCategories) return allCategories;
+        return allCategories.slice(0, 5);
+    };
 
     useEffect(() => {
         const loadProducts = async () => {
-            let data;
-            if (categoryFilter && categoryFilter !== 'All') {
-                data = await getProductsByCategory(categoryFilter);
-            } else {
-                data = await fetchProducts();
-            }
-            setProducts(data);
-            setFilteredProducts(data);
+            const data = await fetchProducts();
+            setAllProducts(data);
+            applyFilters(data);
             setLoading(false);
         };
         loadProducts();
-    }, [categoryFilter]);
+    }, []);
 
-    // Search filter effect
     useEffect(() => {
-        if (searchTerm.trim() === '') {
-            setFilteredProducts(products);
-        } else {
-            const filtered = products.filter(product =>
-                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                product.category.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            setFilteredProducts(filtered);
+        applyFilters(allProducts);
+        setCurrentPage(1);
+    }, [categoryFilter, courseFilter]);
+
+    const applyFilters = (products) => {
+        let filtered = [...products];
+        
+        if (categoryFilter && categoryFilter !== 'All') {
+            filtered = filtered.filter(p => p.category === categoryFilter);
         }
-    }, [searchTerm, products]);
+        
+        if (courseFilter && courseFilter !== 'All Courses') {
+            filtered = filtered.filter(p => p.courses && p.courses.includes(courseFilter));
+        }
+        
+        setFilteredProducts(filtered);
+    };
 
-    // Add to the useEffect
-useEffect(() => {
-    const searchQuery = searchParams.get('search');
-    if (searchQuery) {
-        setSearchTerm(searchQuery);
-    }
-}, [searchParams]);
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        // Search is handled by the useEffect above
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleFilterChange = (type, value) => {
+        if (type === 'category') {
+            setSearchParams({ category: value, course: courseFilter });
+        } else if (type === 'course') {
+            setSearchParams({ category: categoryFilter, course: value });
+        }
+        setCurrentPage(1);
     };
 
     if (loading) {
@@ -81,70 +124,163 @@ useEffect(() => {
     }
 
     return (
-        <section className="py-16 bg-slate-100">
+        <section className="py-8 md:py-12 bg-slate-200">
             <div className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                    
-                    <h1 className="text-2xl md:text-2xl font-extrabold text-secondary">Our Products</h1>
-                    <p className="text-text-light mt-2">Quality equipment for Kenya's future professionals</p>
+                <div className="text-center mb-8">
+                    <h1 className="text-2xl md:text-2xl font-extrabold text-secondary mb-4">Our Products</h1>
+                    <p className="text-text-light text-sm md:text-base mt-1">
+                        {filteredProducts.length} products found
+                    </p>
                 </div>
 
-                {/* Search Bar - Added to Products Page */}
-                <div className="max-w-2xl mx-auto mb-8">
-                    <form onSubmit={handleSearch} className="relative w-full">
-                        <input
-                            type="text"
-                            placeholder="Search products by name, category, or description..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full h-12 px-4 pr-12 bg-white rounded-lg outline-none focus:ring-2 focus:ring-accent/50 transition shadow-sm"
-                        />
-                        <button 
-                            type="submit"
-                            className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center text-gray-500 hover:text-primary-dark transition"
+                {/* Filters */}
+                <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-8">
+                    {/* Course Filter */}
+                    <div className="mb-4">
+                        <div className="flex items-center justify-between mb-2">
+                            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Filter by Course</h3>
+                            <button
+                                onClick={() => setShowAllCourses(!showAllCourses)}
+                                className="md:hidden text-xs text-accent hover:text-accent-hover transition font-medium"
+                            >
+                                {showAllCourses ? 'Show Less' : 'See All'}
+                            </button>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {getVisibleCourses().map(course => (
+                                <button
+                                    key={course}
+                                    onClick={() => handleFilterChange('course', course)}
+                                    className={`px-4 py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap ${
+                                        courseFilter === course
+                                            ? 'bg-primary text-white'
+                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    }`}
+                                >
+                                    {course === 'All Courses' ? 'All' : course}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Category Filter */}
+                    <div>
+                        <div className="flex items-center justify-between mb-2">
+                            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Filter by Category</h3>
+                            <button
+                                onClick={() => setShowAllCategories(!showAllCategories)}
+                                className="md:hidden text-xs text-accent hover:text-accent-hover transition font-medium"
+                            >
+                                {showAllCategories ? 'Show Less' : 'See All'}
+                            </button>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {getVisibleCategories().map(cat => (
+                                <button
+                                    key={cat}
+                                    onClick={() => handleFilterChange('category', cat)}
+                                    className={`px-4 py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap ${
+                                        categoryFilter === cat
+                                            ? 'bg-primary text-white'
+                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    }`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Results Count & Clear Filters */}
+                <div className="flex flex-wrap items-center justify-between mb-4">
+                    <span className="text-sm text-gray-600">
+                        Showing {currentProducts.length} of {filteredProducts.length} products
+                    </span>
+                    {(categoryFilter !== 'All' || courseFilter !== 'All Courses') && (
+                        <button
+                            onClick={() => setSearchParams({})}
+                            className="text-sm text-accent hover:text-accent-hover transition"
                         >
-                            <i className="fas fa-search text-xl"></i>
+                            Clear all filters
                         </button>
-                    </form>
-                    {searchTerm && (
-                        <p className="text-sm text-gray-500 mt-2">
-                            Found {filteredProducts.length} result{filteredProducts.length !== 1 ? 's' : ''}
-                        </p>
                     )}
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-2 mb-8">
-                    {categories.map(cat => (
-                        <Link
-                            key={cat}
-                            to={cat === 'All' ? '/products' : `/products?category=${encodeURIComponent(cat)}`}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                                (!categoryFilter && cat === 'All') || categoryFilter === cat
-                                    ? 'bg-primary text-white'
-                                    : 'bg-white text-gray-600 hover:bg-primary/10'
-                            }`}
-                        >
-                            {cat}
-                        </Link>
-                    ))}
-                </div>
-
-                {filteredProducts.length === 0 ? (
-                    <div className="text-center py-12">
-                        <p className="text-gray-600">No products found matching "{searchTerm}".</p>
-                        <button 
-                            onClick={() => setSearchTerm('')}
+                {/* Product Grid */}
+                {currentProducts.length === 0 ? (
+                    <div className="text-center py-12 bg-white rounded-lg shadow">
+                        <p className="text-gray-600">No products found for this selection.</p>
+                        <button
+                            onClick={() => setSearchParams({})}
                             className="btn btn-primary mt-4 inline-block"
                         >
-                            Clear Search
+                            View All Products
                         </button>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                        {filteredProducts.map(product => (
-                            <ProductCard key={product._id} product={product} />
-                        ))}
-                    </div>
+                    <>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+                            {currentProducts.map(product => (
+                                <ProductCard key={product._id} product={product} />
+                            ))}
+                        </div>
+
+                        {/* Pagination */}
+                        {totalPages > 1 && (
+                            <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+                                <button
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                                        currentPage === 1
+                                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                            : 'bg-white text-gray-700 hover:bg-gray-100'
+                                    }`}
+                                >
+                                    <i className="fas fa-chevron-left"></i>
+                                </button>
+                                
+                                {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                                    let pageNum;
+                                    if (totalPages <= 5) {
+                                        pageNum = i + 1;
+                                    } else if (currentPage <= 3) {
+                                        pageNum = i + 1;
+                                    } else if (currentPage >= totalPages - 2) {
+                                        pageNum = totalPages - 4 + i;
+                                    } else {
+                                        pageNum = currentPage - 2 + i;
+                                    }
+                                    return (
+                                        <button
+                                            key={pageNum}
+                                            onClick={() => handlePageChange(pageNum)}
+                                            className={`w-10 h-10 rounded-lg text-sm font-medium transition ${
+                                                currentPage === pageNum
+                                                    ? 'bg-primary text-white'
+                                                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                                            }`}
+                                        >
+                                            {pageNum}
+                                        </button>
+                                    );
+                                })}
+                                
+                                <button
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                                        currentPage === totalPages
+                                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                            : 'bg-white text-gray-700 hover:bg-gray-100'
+                                    }`}
+                                >
+                                    <i className="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </section>
