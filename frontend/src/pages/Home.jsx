@@ -17,6 +17,7 @@ const Home = () => {
         { name: 'Geospatial Engineering', icon: 'fa-globe-africa' },
         { name: 'Mechanical Engineering', icon: 'fa-cogs' },
         { name: 'Automotive Engineering', icon: 'fa-car' },
+        { name: 'Electrical & Electronics Engineering', icon: 'fa-car' },
         { name: 'Mechatronics Engineering', icon: 'fa-microchip' },
         { name: 'Quantity Survey', icon: 'fa-ruler-combined' },
         { name: 'Building Construction Technology', icon: 'fa-hard-hat' },
@@ -107,8 +108,8 @@ const Home = () => {
                     <div
                         key={slide.id}
                         className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === activeSlide
-                                ? 'opacity-100 translate-x-0'
-                                : 'opacity-0 translate-x-full'
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 translate-x-full'
                             }`}
                         style={{
                             transform: index === activeSlide ? 'translateX(0)' : 'translateX(100%)',
@@ -186,8 +187,8 @@ const Home = () => {
                             key={index}
                             onClick={() => setActiveSlide(index)}
                             className={`h-2 md:h-3 rounded-full transition-all duration-300 ${index === activeSlide
-                                    ? 'bg-white w-6 md:w-8'
-                                    : 'bg-white/40 hover:bg-white/60 w-2 md:w-3'
+                                ? 'bg-white w-6 md:w-8'
+                                : 'bg-white/40 hover:bg-white/60 w-2 md:w-3'
                                 }`}
                             aria-label={`Go to slide ${index + 1}`}
                         />
@@ -195,35 +196,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Shop by Course Section */}
-            <section className="py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-2xl md:text-2xl font-extrabold text-secondary mb-4 ">
-                            Shop by Your Course
-                        </h2>
-                        <p className="text-text-light mt-2 max-w-2xl mx-auto">
-                            Find exactly what you need for your studies. Browse equipment and supplies recommended for your course of study.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
-                        {courses.map((course) => (
-                            <Link
-                                key={course.name}
-                                to={`/products?course=${encodeURIComponent(course.name)}`}
-                                className="bg-slate-100 hover:bg-slate-200 rounded-xl p-6 text-center transition-all hover:scale-105 hover:shadow-lg group"
-                            >
-                                <div className="text-4xl text-primary mb-3 group-hover:scale-110 transition-transform">
-                                    <i className={`fas ${course.icon}`}></i>
-                                </div>
-                                <h3 className="font-semibold text-primary text-sm md:text-base">
-                                    {course.name}
-                                </h3>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            
 
             {/* Featured Products */}
             <section className="py-12 md:py-16 bg-slate-200">
@@ -251,6 +224,41 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+
+
+            {/* Shop by Course Section */}
+            <section className="py-16 bg-white">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-2xl md:text-2xl font-extrabold text-secondary mb-4 ">
+                            Shop by Your Course
+                        </h2>
+                        <p className="text-text-light mt-2 max-w-2xl mx-auto">
+                            Find exactly what you need for your studies. Browse equipment and supplies recommended for your course of study.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-3">
+                        {courses.map((course) => (
+                            <Link
+                                key={course.name}
+                                to={`/products?course=${encodeURIComponent(course.name)}`}
+                                className="bg-slate-100 hover:bg-slate-200 rounded-lg p-2.5 md:p-3 text-center transition-all hover:scale-105 hover:shadow-md group"
+                            >
+                                {/* Icon - Smaller */}
+                                <div className="text-xl md:text-2xl text-primary mb-1 group-hover:scale-110 transition-transform">
+                                    <i className={`fas ${course.icon}`}></i>
+                                </div>
+                                {/* Course Name - Smaller */}
+                                <h3 className="font-semibold text-primary text-xs md:text-sm">
+                                    {course.name}
+                                </h3>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            
         </>
     );
 };

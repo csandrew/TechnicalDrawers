@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// Use the live backend URL on Render
+const API_URL = 'https://technical-drawers-backend.onrender.com';
 
 export const fetchProducts = async () => {
     try {
         const response = await axios.get(`${API_URL}/api/products`);
-        return response.data;
+        if (Array.isArray(response.data)) {
+            return response.data;
+        }
+        return response.data.data || [];
     } catch (error) {
         console.error('Error fetching products:', error);
         return [];
@@ -15,7 +19,13 @@ export const fetchProducts = async () => {
 export const fetchFeaturedProducts = async () => {
     try {
         const response = await axios.get(`${API_URL}/api/products/featured`);
-        return response.data;
+        if (Array.isArray(response.data)) {
+            return response.data;
+        }
+        if (response.data && Array.isArray(response.data.data)) {
+            return response.data.data;
+        }
+        return [];
     } catch (error) {
         console.error('Error fetching featured products:', error);
         return [];
@@ -36,20 +46,12 @@ export const getProductsByCategory = async (category) => {
     try {
         const url = category ? `${API_URL}/api/products?category=${encodeURIComponent(category)}` : `${API_URL}/api/products`;
         const response = await axios.get(url);
-        return response.data;
+        if (Array.isArray(response.data)) {
+            return response.data;
+        }
+        return response.data.data || [];
     } catch (error) {
         console.error('Error fetching products by category:', error);
-        return [];
-    }
-};
-
-export const getProductsByCourse = async (course) => {
-    try {
-        const response = await axios.get(`${API_URL}/api/products`);
-        const products = response.data;
-        return products.filter(p => p.courses && p.courses.includes(course));
-    } catch (error) {
-        console.error('Error fetching products by course:', error);
         return [];
     }
 };
