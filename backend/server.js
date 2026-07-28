@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -15,8 +16,24 @@ const app = express();
 // Connect to Database
 connectDB();
 
+// ============================================
+// CORS Configuration - ALLOW YOUR DOMAINS
+// ============================================
+const corsOptions = {
+    origin: [
+        'https://technicaldrawers.co.ke',
+        'http://technicaldrawers.co.ke',
+        'https://www.technicaldrawers.co.ke',
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'https://technical-drawers-backend.onrender.com'
+    ],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
