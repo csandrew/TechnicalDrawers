@@ -16,26 +16,10 @@ const app = express();
 connectDB();
 
 // ============================================
-// CORS Configuration - Allow ALL origins for development
+// SIMPLE CORS - Allow all origins
 // ============================================
-const corsOptions = {
-    origin: [
-        'https://technicaldrawers.co.ke',
-        'http://technicaldrawers.co.ke',
-        'https://www.technicaldrawers.co.ke',
-        'http://localhost:3000',
-        'http://localhost:5173',
-        'http://127.0.0.1:3000',
-        'http://127.0.0.1:5173'
-    ],
-    credentials: true,
-    optionsSuccessStatus: 200
-};
+app.use(cors());
 
-// For development, you can also use:
-// app.use(cors()); // Allows all origins
-
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -50,10 +34,10 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'Technical Drawers API is running' });
 });
 
-// Error Handler (must be last)
+// Error Handler
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
 });
