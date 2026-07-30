@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -11,20 +10,23 @@ const app = express();
 connectDB();
 
 // ============================================
-// CORS CONFIGURATION - Allow all origins
+// ULTRA PERMISSIVE CORS - Fix for localhost
 // ============================================
 app.use(cors({
-    origin: '*',
+    origin: true, // Allows all origins
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use(express.json());
 
 // ============================================
 // ROUTES
 // ============================================
-
 
 // Health check
 app.get('/api/health', (req, res) => {
