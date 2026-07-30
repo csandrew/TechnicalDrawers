@@ -24,9 +24,13 @@ const productSchema = new mongoose.Schema({
     stock: { type: Number, required: true, default: 0 },
     featured: { type: Boolean, default: false },
     tags: [String],
-    courses: [{ type: String }],
     specifications: { type: Map, of: String },
     createdAt: { type: Date, default: Date.now }
 });
+
+// Indexes for better performance
+productSchema.index({ slug: 1 });
+productSchema.index({ category: 1 });
+productSchema.index({ featured: 1 });
 
 module.exports = mongoose.model('Product', productSchema);

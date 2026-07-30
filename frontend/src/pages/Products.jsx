@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -16,35 +17,27 @@ const Products = () => {
     const productsPerPage = 12;
     
     // Mobile expand state
-    const [showAllCourses, setShowAllCourses] = useState(false);
     const [showAllCategories, setShowAllCategories] = useState(false);
     
     // Get filters from URL
     const categoryFilter = searchParams.get('category') || 'All';
-    const courseFilter = searchParams.get('course') || 'All Courses';
 
-   const categories = [
-    'All',
-    'Engineering Drawing Equipment',
-    'Scientific Calculators',
-    'Measuring Instruments',
-    'Hand Tools',
-    'Electrical Tools',
-    'Safety Equipment',
-    'Stationery & Office Supplies',
-    'Art & Drafting Supplies',
-    'Textbooks & Reference'
-];
-
-    // Show only first 4 on mobile unless expanded
-    const getVisibleCourses = () => {
-        if (showAllCourses) return allCourses;
-        return allCourses.slice(0, 5);
-    };
+    const categories = [
+        'All',
+        'Scientific Calculators',
+        'Engineering Drawing Equipment',
+        'Measuring Instruments',
+        'Hand Tools',
+        'Electrical Tools',
+        'Safety Equipment',
+        'Stationery & Office Supplies',
+        'Art & Drafting Supplies',
+        'Textbooks & Reference'
+    ];
 
     const getVisibleCategories = () => {
-        if (showAllCategories) return allCategories;
-        return allCategories.slice(0, 5);
+        if (showAllCategories) return categories;
+        return categories.slice(0, 6);
     };
 
     useEffect(() => {
@@ -60,17 +53,13 @@ const Products = () => {
     useEffect(() => {
         applyFilters(allProducts);
         setCurrentPage(1);
-    }, [categoryFilter, courseFilter]);
+    }, [categoryFilter]);
 
     const applyFilters = (products) => {
         let filtered = [...products];
         
         if (categoryFilter && categoryFilter !== 'All') {
             filtered = filtered.filter(p => p.category === categoryFilter);
-        }
-        
-        if (courseFilter && courseFilter !== 'All Courses') {
-            filtered = filtered.filter(p => p.courses && p.courses.includes(courseFilter));
         }
         
         setFilteredProducts(filtered);
@@ -86,12 +75,8 @@ const Products = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handleFilterChange = (type, value) => {
-        if (type === 'category') {
-            setSearchParams({ category: value, course: courseFilter });
-        } else if (type === 'course') {
-            setSearchParams({ category: categoryFilter, course: value });
-        }
+    const handleFilterChange = (value) => {
+        setSearchParams({ category: value });
         setCurrentPage(1);
     };
 
@@ -116,37 +101,8 @@ const Products = () => {
                     </p>
                 </div>
 
-                {/* Filters */}
+                {/* Category Filter */}
                 <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-8">
-                    {/* Course Filter */}
-                    <div className="mb-4">
-                        <div className="flex items-center justify-between mb-2">
-                            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Filter by Course</h3>
-                            <button
-                                onClick={() => setShowAllCourses(!showAllCourses)}
-                                className="md:hidden text-xs text-accent hover:text-accent-hover transition font-medium"
-                            >
-                                {showAllCourses ? 'Show Less' : 'See All'}
-                            </button>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                            {getVisibleCourses().map(course => (
-                                <button
-                                    key={course}
-                                    onClick={() => handleFilterChange('course', course)}
-                                    className={`px-4 py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap ${
-                                        courseFilter === course
-                                            ? 'bg-primary text-white'
-                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                                    }`}
-                                >
-                                    {course === 'All Courses' ? 'All' : course}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Category Filter */}
                     <div>
                         <div className="flex items-center justify-between mb-2">
                             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Filter by Category</h3>
@@ -161,7 +117,7 @@ const Products = () => {
                             {getVisibleCategories().map(cat => (
                                 <button
                                     key={cat}
-                                    onClick={() => handleFilterChange('category', cat)}
+                                    onClick={() => handleFilterChange(cat)}
                                     className={`px-4 py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap ${
                                         categoryFilter === cat
                                             ? 'bg-primary text-white'
@@ -180,7 +136,7 @@ const Products = () => {
                     <span className="text-sm text-gray-600">
                         Showing {currentProducts.length} of {filteredProducts.length} products
                     </span>
-                    {(categoryFilter !== 'All' || courseFilter !== 'All Courses') && (
+                    {categoryFilter !== 'All' && (
                         <button
                             onClick={() => setSearchParams({})}
                             className="text-sm text-accent hover:text-accent-hover transition"

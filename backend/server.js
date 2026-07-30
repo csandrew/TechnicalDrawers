@@ -10,22 +10,31 @@ const app = express();
 connectDB();
 
 // ============================================
-// ULTRA PERMISSIVE CORS - Fix for localhost
+// CORS Configuration
 // ============================================
 app.use(cors({
-    origin: true, // Allows all origins
+    origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
-// Handle preflight requests
 app.options('*', cors());
 
+// ============================================
+// Middleware
+// ============================================
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Request logging (optional)
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
 
 // ============================================
-// ROUTES
+// Routes
 // ============================================
 
 // Health check
@@ -75,8 +84,16 @@ app.get('/api/products/:id', async (req, res) => {
     }
 });
 
+// 404 handler
+app.use((req, res) => {
+    res.status(404).json({ 
+        success: false, 
+        message: `Route ${req.originalUrl} not found` 
+    });
+});
+
 // ============================================
-// START SERVER - Bind to all interfaces
+// Start Server
 // ============================================
 
 const PORT = process.env.PORT || 5000;

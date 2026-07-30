@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -25,7 +26,12 @@ import UrbanPlanning from './pages/blog/UrbanPlanning';
 function App() {
     return (
         <CartProvider>
-            <Router>
+            <Router
+                future={{
+                    v7_startTransition: true,
+                    v7_relativeSplatPath: true,
+                }}
+            >
                 <Header />
                 <main className="pt-0">
                     <Routes>

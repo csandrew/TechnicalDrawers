@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -50,10 +51,38 @@ const ProductDetail = () => {
     return (
         <section className="py-16 bg-slate-50">
             <div className="container mx-auto px-4">
+                {/* Breadcrumb */}
+                <div className="text-sm text-gray-500 mb-6">
+                    <Link to="/" className="hover:text-accent">Home</Link>
+                    <span className="mx-2">/</span>
+                    <Link to="/products" className="hover:text-accent">Products</Link>
+                    <span className="mx-2">/</span>
+                    <span className="text-gray-700">{product.name}</span>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-12 bg-white rounded-custom p-6 md:p-12 shadow-custom">
+                    {/* Image */}
                     <div>
-                        <img src={product.images[0]} alt={product.name} className="w-full rounded-lg" />
+                        <img 
+                            src={product.images[0]} 
+                            alt={product.name} 
+                            className="w-full rounded-lg object-cover aspect-square"
+                        />
+                        {product.images.length > 1 && (
+                            <div className="flex gap-2 mt-3">
+                                {product.images.map((img, i) => (
+                                    <img 
+                                        key={i}
+                                        src={img} 
+                                        alt={`${product.name} ${i+1}`}
+                                        className="w-16 h-16 rounded-lg object-cover cursor-pointer hover:opacity-80 border-2 border-transparent hover:border-accent transition"
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
+
+                    {/* Info */}
                     <div>
                         <span className="text-accent font-semibold text-sm uppercase tracking-wider">{product.category}</span>
                         <h1 className="text-3xl font-extrabold text-primary mt-2">{product.name}</h1>
@@ -102,6 +131,21 @@ const ProductDetail = () => {
                                 <i className="fab fa-whatsapp"></i> Enquire Now
                             </a>
                         </div>
+
+                        {/* Specifications */}
+                        {product.specifications && Object.keys(product.specifications).length > 0 && (
+                            <div className="mt-8 border-t pt-6">
+                                <h3 className="text-lg font-bold text-primary mb-3">Specifications</h3>
+                                <div className="grid grid-cols-2 gap-2 bg-slate-50 rounded-lg p-4">
+                                    {Object.entries(product.specifications).map(([key, value]) => (
+                                        <div key={key} className="flex items-center gap-2">
+                                            <span className="font-semibold text-gray-700">{key}:</span>
+                                            <span className="text-gray-600">{value}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

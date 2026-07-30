@@ -1,7 +1,7 @@
+
 import axios from 'axios';
 
-// Use the live backend URL on Render
-const API_URL = 'https://technical-drawers-backend.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://technical-drawers-backend.onrender.com';
 
 export const fetchProducts = async () => {
     try {
