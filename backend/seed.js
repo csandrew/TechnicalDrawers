@@ -3,25 +3,72 @@ const mongoose = require('mongoose');
 const Product = require('./src/models/Product');
 
 // ============================================
-// CLOUDINARY BASE URL (Update with your cloud name)
+// CLOUDINARY BASE URL
 // ============================================
-const CLOUD_BASE = 'https://res.cloudinary.com/j2zcgbug/image/upload';
-
 const getImage = (folder, filename) => {
-    return `${CLOUD_BASE}/w_400,h_400,c_fit,f_auto,q_auto/technical-drawers/products/${folder}/${filename}`;
+    return `https://res.cloudinary.com/gaovndvn/image/upload/v1785410818/${folder}/${filename}`;
 };
 
 const products = [
+
     // ============================================
-    // 1. SCIENTIFIC CALCULATORS (8)
+    // SCIENTIFIC CALCULATORS (5)
     // ============================================
+    {
+        name: 'Casio FX-991MS Calculator',
+        slug: 'casio-fx-991ms',
+        description: 'Advanced scientific calculator with 417 functions. Ideal for engineering students.',
+        price: 3200,
+        category: 'Scientific Calculators',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785409605/fx-991-ms_r2a3kp.png'],
+        stock: 30,
+        featured: false,
+        tags: ['calculator', 'engineering'],
+        specifications: {
+            'Model': 'FX-991MS',
+            'Functions': '417',
+            'Power': 'Battery Only'
+        }
+    },
+    {
+        name: 'Casio FX-991EX ClassWiz',
+        slug: 'casio-fx-991ex-classwiz',
+        description: 'The most advanced scientific calculator with spreadsheet functionality. Perfect for engineering and statistics students.',
+        price: 4200,
+        category: 'Scientific Calculators',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785409591/fx-991-ex_itewbq.png'],
+        stock: 30,
+        featured: true,
+        tags: ['calculator', 'classwiz', 'best-seller'],
+        specifications: {
+            'Model': 'FX-991EX ClassWiz',
+            'Functions': '552',
+            'Power': 'Solar + Battery'
+        }
+    },
+    {
+        name: 'Casio FX-991ES Plus',
+        slug: 'casio-fx-991es-plus',
+        description: 'The most popular scientific calculator for engineering students. Features 417 functions with solar + battery power.',
+        price: 3500,
+        category: 'Scientific Calculators',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785408750/fx-991-es-plus_kk08zh.png'],
+        stock: 50,
+        featured: true,
+        tags: ['calculator', 'engineering', 'best-seller'],
+        specifications: {
+            'Model': 'FX-991ES Plus',
+            'Functions': '417',
+            'Power': 'Solar + Battery'
+        }
+    },
     {
         name: 'Casio FX-82MS Calculator',
         slug: 'casio-fx-82ms',
         description: 'Beginner-friendly scientific calculator with 240 functions. Perfect for high school and first-year university students.',
         price: 2500,
         category: 'Scientific Calculators',
-        images: [getImage('calculators', 'fx-82ms.png')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785408746/fx-82-ms_tuumzk.jpg'],
         stock: 60,
         featured: false,
         tags: ['calculator', 'beginner', 'school'],
@@ -37,7 +84,7 @@ const products = [
         description: 'Advanced scientific calculator with 274 functions and high-resolution display.',
         price: 2800,
         category: 'Scientific Calculators',
-        images: [getImage('calculators', 'fx-82ex-classwiz.png')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785408746/fx-82-ex_e010bc.png'],
         stock: 45,
         featured: false,
         tags: ['calculator', 'classwiz'],
@@ -47,113 +94,17 @@ const products = [
             'Power': 'Battery Only'
         }
     },
-    {
-        name: 'Casio FX-100MS Calculator',
-        slug: 'casio-fx-100ms',
-        description: 'Reliable scientific calculator with 240 functions. Ideal for engineering and science students.',
-        price: 2700,
-        category: 'Scientific Calculators',
-        images: [getImage('calculators', 'fx-100ms.png')],
-        stock: 40,
-        featured: false,
-        tags: ['calculator', 'engineering'],
-        specifications: {
-            'Model': 'FX-100MS',
-            'Functions': '240',
-            'Power': 'Battery Only'
-        }
-    },
-    {
-        name: 'Casio FX-570MS Calculator',
-        slug: 'casio-fx-570ms',
-        description: 'Multi-replay scientific calculator with 401 functions. Perfect for engineering and architecture students.',
-        price: 2800,
-        category: 'Scientific Calculators',
-        images: [getImage('calculators', 'fx-570ms.png')],
-        stock: 35,
-        featured: false,
-        tags: ['calculator', 'multi-replay'],
-        specifications: {
-            'Model': 'FX-570MS',
-            'Functions': '401',
-            'Power': 'Battery Only'
-        }
-    },
-    {
-        name: 'Casio FX-570ES Plus Calculator',
-        slug: 'casio-fx-570es-plus',
-        description: 'Advanced scientific calculator with 417 functions. Ideal for engineering and science students.',
-        price: 3000,
-        category: 'Scientific Calculators',
-        images: [getImage('calculators', 'fx-570es-plus.png')],
-        stock: 35,
-        featured: true,
-        tags: ['calculator', 'engineering', 'best-seller'],
-        specifications: {
-            'Model': 'FX-570ES Plus',
-            'Functions': '417',
-            'Power': 'Battery Only'
-        }
-    },
-    {
-        name: 'Casio FX-991MS Calculator',
-        slug: 'casio-fx-991ms',
-        description: 'Advanced scientific calculator with 417 functions. Ideal for engineering students.',
-        price: 3200,
-        category: 'Scientific Calculators',
-        images: [getImage('calculators', 'fx-991ms.png')],
-        stock: 30,
-        featured: false,
-        tags: ['calculator', 'engineering'],
-        specifications: {
-            'Model': 'FX-991MS',
-            'Functions': '417',
-            'Power': 'Battery Only'
-        }
-    },
-    {
-        name: 'Casio FX-991ES Plus Calculator',
-        slug: 'casio-fx-991es-plus',
-        description: 'The most popular scientific calculator for engineering students. Features 417 functions with solar + battery power.',
-        price: 3500,
-        category: 'Scientific Calculators',
-        images: [getImage('calculators', 'fx-991es-plus.png')],
-        stock: 50,
-        featured: true,
-        tags: ['calculator', 'engineering', 'best-seller'],
-        specifications: {
-            'Model': 'FX-991ES Plus',
-            'Functions': '417',
-            'Power': 'Solar + Battery'
-        }
-    },
-    {
-        name: 'Casio FX-991EX ClassWiz',
-        slug: 'casio-fx-991ex-classwiz',
-        description: 'The most advanced scientific calculator with spreadsheet functionality. Perfect for engineering and statistics students.',
-        price: 4200,
-        category: 'Scientific Calculators',
-        images: [getImage('calculators', 'fx-991ex-classwiz.png')],
-        stock: 30,
-        featured: true,
-        tags: ['calculator', 'classwiz', 'best-seller'],
-        specifications: {
-            'Model': 'FX-991EX ClassWiz',
-            'Functions': '552',
-            'Power': 'Solar + Battery'
-        }
-    },
 
     // ============================================
-    // 2. ENGINEERING DRAWING EQUIPMENT (28)
+    // ENGINEERING DRAWING EQUIPMENT
     // ============================================
     {
-        name: 'A2 Drawing Board (Wooden)',
+        name: 'A2 Drawing Board',
         slug: 'a2-drawing-board-wooden',
         description: 'High-quality wooden A2 drawing board with smooth surface. Ideal for engineering and architecture students.',
         price: 3500,
         category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/boards', 'a2-drawing-board-wooden.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785412697/a2-drawing-board-smart_ds5pyf.webp'],
         stock: 20,
         featured: false,
         tags: ['drawing', 'board'],
@@ -163,12 +114,12 @@ const products = [
         }
     },
     {
-        name: 'A2 Drawing Board (Smart Board)',
-        slug: 'a2-drawing-board-smart',
+        name: 'Drawing Board (Smart Board)',
+        slug: 'drawing-board-smart',
         description: 'Professional A2 smart drawing board with parallel motion.',
         price: 5500,
         category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/boards', 'a2-drawing-board-smart.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785412866/drawing-board_czaryd.jpg'],
         stock: 15,
         featured: true,
         tags: ['drawing', 'board', 'smart'],
@@ -183,7 +134,7 @@ const products = [
         description: 'Complete drawing set with compass, divider, and accessories.',
         price: 1200,
         category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/sets', 'engineering-drawing-set.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410818/engineering-drawing-set_tb2nzd.jpg'],
         stock: 40,
         featured: true,
         tags: ['drawing', 'set', 'compass', 'best-seller'],
@@ -198,7 +149,7 @@ const products = [
         description: 'Professional T-square for accurate technical drawings.',
         price: 800,
         category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/t-squares', 't-square-60cm.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410745/60cm-t-square_ot2fsr.jpg'],
         stock: 45,
         featured: true,
         tags: ['t-square', 'drawing', 'best-seller'],
@@ -213,7 +164,7 @@ const products = [
         description: 'Large T-square for larger paper sizes.',
         price: 1200,
         category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/t-squares', 't-square-90cm.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410749/90cm-t-square_olhhpe.jpg'],
         stock: 30,
         featured: false,
         tags: ['t-square', 'drawing'],
@@ -228,7 +179,7 @@ const products = [
         description: 'Professional set squares with 30°/60°/90° and 45°/45°/90° angles.',
         price: 400,
         category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/set-squares', 'standard-set-squares.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785412777/standard-set-squares_kq8vua.jpg'],
         stock: 80,
         featured: true,
         tags: ['set-square', 'angles', 'best-seller'],
@@ -238,147 +189,12 @@ const products = [
         }
     },
     {
-        name: 'Adjustable Set Square',
-        slug: 'adjustable-set-square',
-        description: 'Adjustable set square with locking mechanism for custom angles.',
-        price: 650,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/set-squares', 'adjustable-set-square.jpg')],
-        stock: 40,
-        featured: false,
-        tags: ['set-square', 'adjustable'],
-        specifications: {
-            'Material': 'Plastic',
-            'Angle Range': '0° - 360°'
-        }
-    },
-    {
-        name: 'Scale Ruler (Metric)',
-        slug: 'scale-ruler-metric',
-        description: 'Professional scale ruler with metric measurements.',
-        price: 350,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'scale-ruler-metric.jpg')],
-        stock: 70,
-        featured: false,
-        tags: ['ruler', 'scale'],
-        specifications: {
-            'Length': '30cm',
-            'Material': 'Plastic'
-        }
-    },
-    {
-        name: 'Protractor (360°)',
-        slug: 'protractor-360',
-        description: 'Clear plastic 360° protractor for accurate angle measurement.',
-        price: 250,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'protractor-360.jpg')],
-        stock: 60,
-        featured: false,
-        tags: ['protractor', 'angles'],
-        specifications: {
-            'Range': '360°',
-            'Material': 'Clear Plastic'
-        }
-    },
-    {
-        name: 'French Curve Set',
-        slug: 'french-curve-set',
-        description: 'French curve set for smooth curved lines.',
-        price: 450,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'french-curve-set.jpg')],
-        stock: 50,
-        featured: false,
-        tags: ['french-curve', 'curves'],
-        specifications: {
-            'Pieces': '3',
-            'Material': 'Plastic'
-        }
-    },
-    {
-        name: 'Steel Ruler 30cm',
-        slug: 'steel-ruler-30cm',
-        description: 'Durable stainless steel ruler with metric markings.',
-        price: 150,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'steel-ruler-30cm.jpg')],
-        stock: 100,
-        featured: false,
-        tags: ['ruler', 'steel'],
-        specifications: {
-            'Length': '30cm',
-            'Material': 'Stainless Steel'
-        }
-    },
-    {
-        name: 'Steel Ruler 50cm',
-        slug: 'steel-ruler-50cm',
-        description: 'Durable stainless steel ruler.',
-        price: 250,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'steel-ruler-50cm.jpg')],
-        stock: 80,
-        featured: false,
-        tags: ['ruler', 'steel'],
-        specifications: {
-            'Length': '50cm',
-            'Material': 'Stainless Steel'
-        }
-    },
-    {
-        name: 'Steel Ruler 60cm',
-        slug: 'steel-ruler-60cm',
-        description: 'Durable stainless steel ruler.',
-        price: 300,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'steel-ruler-60cm.jpg')],
-        stock: 70,
-        featured: false,
-        tags: ['ruler', 'steel'],
-        specifications: {
-            'Length': '60cm',
-            'Material': 'Stainless Steel'
-        }
-    },
-    {
-        name: 'Steel Ruler 100cm',
-        slug: 'steel-ruler-100cm',
-        description: 'Large stainless steel ruler for large-scale measurements.',
-        price: 450,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'steel-ruler-100cm.jpg')],
-        stock: 40,
-        featured: false,
-        tags: ['ruler', 'steel'],
-        specifications: {
-            'Length': '100cm',
-            'Material': 'Stainless Steel'
-        }
-    },
-    {
-        name: 'Vernier Calipers (Analog)',
-        slug: 'vernier-calipers-analog',
-        description: 'Precision analog vernier calipers.',
-        price: 1500,
-        category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'vernier-calipers-analog.jpg')],
-        stock: 30,
-        featured: false,
-        tags: ['calipers', 'vernier'],
-        specifications: {
-            'Range': '150mm',
-            'Accuracy': '0.05mm'
-        }
-    },
-    {
-        name: 'Vernier Calipers (Digital)',
-        slug: 'vernier-calipers-digital',
+        name: 'Digital Vernier Calipers',
+        slug: 'digital-vernier-calipers',
         description: 'Precision digital vernier calipers with LCD display.',
         price: 2500,
         category: 'Engineering Drawing Equipment',
-        images: [getImage('drawing/measuring', 'vernier-calipers-digital.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413771/digital-vernier-calipers_r3bks5.jpg'],
         stock: 25,
         featured: true,
         tags: ['calipers', 'vernier', 'digital'],
@@ -388,117 +204,12 @@ const products = [
         }
     },
     {
-        name: 'Drawing Pad A3',
-        slug: 'drawing-pad-a3',
-        description: 'High-quality A3 drawing pad with smooth paper.',
-        price: 450,
-        category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'drawing-pad-a3.jpg')],
-        stock: 50,
-        featured: true,
-        tags: ['drawing', 'pad', 'paper'],
-        specifications: {
-            'Size': 'A3',
-            'Sheets': '50'
-        }
-    },
-    {
-        name: 'Drawing Pad A4',
-        slug: 'drawing-pad-a4',
-        description: 'High-quality A4 drawing pad.',
-        price: 300,
-        category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'drawing-pad-a4.jpg')],
-        stock: 80,
-        featured: false,
-        tags: ['drawing', 'pad', 'paper'],
-        specifications: {
-            'Size': 'A4',
-            'Sheets': '50'
-        }
-    },
-    {
-        name: 'Sketch Pad A3',
-        slug: 'sketch-pad-a3',
-        description: 'Premium A3 sketch pad with textured paper.',
-        price: 500,
-        category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'sketch-pad-a3.jpg')],
-        stock: 40,
-        featured: false,
-        tags: ['sketch', 'pad', 'paper'],
-        specifications: {
-            'Size': 'A3',
-            'Sheets': '40'
-        }
-    },
-    {
-        name: 'Sketch Pad A5',
-        slug: 'sketch-pad-a5',
-        description: 'Compact A5 sketch pad for quick sketches.',
-        price: 250,
-        category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'sketch-pad-a5.jpg')],
-        stock: 60,
-        featured: false,
-        tags: ['sketch', 'pad'],
-        specifications: {
-            'Size': 'A5',
-            'Sheets': '40'
-        }
-    },
-    {
-        name: 'Display Book A3',
-        slug: 'display-book-a3',
-        description: 'Professional A3 display book for portfolio presentation.',
-        price: 600,
-        category: 'Stationery & Office Supplies',
-        images: [getImage('drawing/accessories', 'display-book-a3.jpg')],
-        stock: 30,
-        featured: false,
-        tags: ['display', 'book', 'portfolio'],
-        specifications: {
-            'Size': 'A3',
-            'Sheets': '20'
-        }
-    },
-    {
-        name: 'Display Book A4',
-        slug: 'display-book-a4',
-        description: 'Professional A4 display book.',
-        price: 400,
-        category: 'Stationery & Office Supplies',
-        images: [getImage('drawing/accessories', 'display-book-a4.jpg')],
-        stock: 50,
-        featured: false,
-        tags: ['display', 'book'],
-        specifications: {
-            'Size': 'A4',
-            'Sheets': '20'
-        }
-    },
-    {
-        name: 'Drawing Book',
-        slug: 'drawing-book',
-        description: 'High-quality drawing book with thick paper.',
-        price: 350,
-        category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'drawing-book.jpg')],
-        stock: 60,
-        featured: false,
-        tags: ['drawing', 'book'],
-        specifications: {
-            'Sheets': '40',
-            'Paper Weight': '120gsm'
-        }
-    },
-    {
         name: 'Drawing Holder (Bazooka)',
         slug: 'drawing-holder-bazooka',
         description: 'Durable drawing holder for storing A2 and A3 drawings.',
         price: 800,
         category: 'Stationery & Office Supplies',
-        images: [getImage('drawing/accessories', 'drawing-holder-bazooka.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785412913/drawing-holder-bazooka_kml0ci.jpg'],
         stock: 25,
         featured: false,
         tags: ['drawing', 'holder'],
@@ -507,13 +218,17 @@ const products = [
             'Material': 'Plastic'
         }
     },
+
+    // ============================================
+    // ART & DRAFTING SUPPLIES
+    // ============================================
     {
         name: 'Cutting Mat A1',
         slug: 'cutting-mat-a1',
         description: 'Self-healing cutting mat for precision cutting.',
         price: 1500,
         category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'cutting-mat-a1.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413739/cutting-mat_gbamou.jpg'],
         stock: 20,
         featured: false,
         tags: ['cutting', 'mat'],
@@ -528,7 +243,7 @@ const products = [
         description: 'Self-healing cutting mat.',
         price: 1200,
         category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'cutting-mat-a2.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413739/cutting-mat_gbamou.jpg'],
         stock: 30,
         featured: false,
         tags: ['cutting', 'mat'],
@@ -543,7 +258,7 @@ const products = [
         description: 'Self-healing cutting mat.',
         price: 800,
         category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'cutting-mat-a3.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413739/cutting-mat_gbamou.jpg'],
         stock: 40,
         featured: false,
         tags: ['cutting', 'mat'],
@@ -558,7 +273,7 @@ const products = [
         description: 'Self-healing cutting mat.',
         price: 500,
         category: 'Art & Drafting Supplies',
-        images: [getImage('drawing/accessories', 'cutting-mat-a4.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413739/cutting-mat_gbamou.jpg'],
         stock: 60,
         featured: false,
         tags: ['cutting', 'mat'],
@@ -567,28 +282,137 @@ const products = [
             'Material': 'PVC'
         }
     },
-
-    // ============================================
-    // 3. MEASURING INSTRUMENTS (Add more)
-    // ============================================
     {
-        name: 'Digital Vernier Calipers',
-        slug: 'digital-vernier-calipers',
-        description: 'Precision digital vernier calipers with LCD display.',
-        price: 2500,
-        category: 'Measuring Instruments',
-        images: [getImage('measuring', 'digital-vernier-calipers.jpg')],
-        stock: 25,
-        featured: true,
-        tags: ['calipers', 'vernier', 'digital'],
+        name: 'Water Colour Tubes (12 Colours)',
+        slug: 'water-colour-tubes-12',
+        description: 'Professional water colour paint set with 12 vibrant colours. Perfect for design and art projects.',
+        price: 450,
+        category: 'Art & Drafting Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410385/water-colour-tubes-12_ismim1.jpg'],
+        stock: 30,
+        featured: false,
+        tags: ['water-colour', 'paint', 'art'],
         specifications: {
-            'Range': '150mm',
-            'Accuracy': '0.01mm'
+            'Colours': '12',
+            'Type': 'Water Colour',
+            'Format': 'Tubes'
+        }
+    },
+    {
+        name: 'Water Colour Paper',
+        slug: 'water-colour-paper',
+        description: 'Professional water colour paper for painting and design. Textured surface for water colour techniques.',
+        price: 400,
+        category: 'Art & Drafting Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410381/water-colour-paper_doz3sk.jpg'],
+        stock: 40,
+        featured: false,
+        tags: ['water-colour', 'paper', 'art'],
+        specifications: {
+            'Sheets': '10',
+            'Type': 'Water Colour Paper'
+        }
+    },
+    {
+        name: 'Water Colour Pad',
+        slug: 'water-colour-pad',
+        description: 'Professional water colour pad with textured paper. Perfect for water colour painting and design.',
+        price: 500,
+        category: 'Art & Drafting Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410378/water-colour-pad_bcni5t.jpg'],
+        stock: 30,
+        featured: false,
+        tags: ['water-colour', 'pad', 'paper', 'art'],
+        specifications: {
+            'Size': 'A3',
+            'Sheets': '20',
+            'Type': 'Water Colour Pad'
+        }
+    },
+    {
+        name: 'Painting Palette',
+        slug: 'painting-palette',
+        description: 'Professional painting palette for mixing colours. Perfect for art and design projects.',
+        price: 200,
+        category: 'Art & Drafting Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410374/painting-palette_zvr1yc.jpg'],
+        stock: 50,
+        featured: false,
+        tags: ['palette', 'painting', 'art'],
+        specifications: {
+            'Type': 'Painting Palette',
+            'Material': 'Plastic'
+        }
+    },
+    {
+        name: 'Paint Brushes Set',
+        slug: 'paint-brushes-set',
+        description: 'Professional paint brush set for art and design work. Various sizes for different techniques.',
+        price: 350,
+        category: 'Art & Drafting Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410371/paint-brushes_ertmoz.jpg'],
+        stock: 40,
+        featured: false,
+        tags: ['paint', 'brushes', 'art', 'design'],
+        specifications: {
+            'Pieces': '6',
+            'Types': 'Round, Flat, Detail',
+            'Material': 'Synthetic Bristles'
+        }
+    },
+    {
+        name: 'Colour Pencils (12 Colours)',
+        slug: 'colour-pencils-12',
+        description: 'Professional colour pencil set with 12 vibrant colours. Perfect for design and art projects.',
+        price: 350,
+        category: 'Art & Drafting Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410364/colour-pencils-12_pqcoua.jpg'],
+        stock: 60,
+        featured: false,
+        tags: ['colour', 'pencils', 'art', 'design'],
+        specifications: {
+            'Colours': '12',
+            'Type': 'Colour Pencils',
+            'Packaging': 'Tin Box'
+        }
+    },
+    {
+        name: 'Crayons (24 Colours)',
+        slug: 'crayons-24',
+        description: 'High-quality crayons for art and design projects. Bright colours for creative work.',
+        price: 250,
+        category: 'Art & Drafting Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410367/crayons_rjcp8c.jpg'],
+        stock: 50,
+        featured: false,
+        tags: ['crayons', 'art', 'colouring'],
+        specifications: {
+            'Colours': '24',
+            'Type': 'Crayons'
         }
     },
 
     // ============================================
-    // 4. HAND TOOLS (6)
+    // MEASURING INSTRUMENTS
+    // ============================================
+    {
+        name: 'Mason Tape Measure',
+        slug: 'mason-tape-measure',
+        description: 'Durable measuring tape for masonry and construction work.',
+        price: 300,
+        category: 'Measuring Instruments',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785412391/tape-measure-mason_njlg8o.jpg'],
+        stock: 60,
+        featured: false,
+        tags: ['tape', 'measuring', 'mason'],
+        specifications: {
+            'Length': '5m',
+            'Material': 'Steel'
+        }
+    },
+
+    // ============================================
+    // HAND TOOLS
     // ============================================
     {
         name: 'Pipe Wrench (14")',
@@ -596,7 +420,7 @@ const products = [
         description: 'Durable 14-inch pipe wrench.',
         price: 1200,
         category: 'Hand Tools',
-        images: [getImage('hand-tools', 'pipe-wrench-14.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410598/pipe-wrench-14_oe2j1n.jpg'],
         stock: 20,
         featured: false,
         tags: ['wrench', 'pipe'],
@@ -606,57 +430,12 @@ const products = [
         }
     },
     {
-        name: 'Combination Spanner Set',
-        slug: 'combination-spanner-set',
-        description: 'Professional combination spanner set (8mm - 19mm).',
-        price: 2500,
-        category: 'Hand Tools',
-        images: [getImage('hand-tools', 'combination-spanner-set.jpg')],
-        stock: 30,
-        featured: true,
-        tags: ['spanner', 'set'],
-        specifications: {
-            'Sizes': '8mm - 19mm',
-            'Pieces': '12'
-        }
-    },
-    {
-        name: 'Socket Spanner Set',
-        slug: 'socket-spanner-set',
-        description: 'Professional socket spanner set (6mm - 24mm).',
-        price: 3500,
-        category: 'Hand Tools',
-        images: [getImage('hand-tools', 'socket-spanner-set.jpg')],
-        stock: 20,
-        featured: false,
-        tags: ['socket', 'spanner'],
-        specifications: {
-            'Sizes': '6mm - 24mm',
-            'Pieces': '20'
-        }
-    },
-    {
-        name: 'Combination Pliers',
-        slug: 'combination-pliers',
-        description: 'Professional combination pliers with gripping and cutting functions.',
-        price: 800,
-        category: 'Hand Tools',
-        images: [getImage('hand-tools', 'combination-pliers.jpg')],
-        stock: 40,
-        featured: true,
-        tags: ['pliers', 'combination'],
-        specifications: {
-            'Length': '200mm',
-            'Material': 'Steel'
-        }
-    },
-    {
         name: 'Long Nose Pliers',
         slug: 'long-nose-pliers',
         description: 'Professional long nose pliers for precision work.',
         price: 700,
         category: 'Hand Tools',
-        images: [getImage('hand-tools', 'long-nose-pliers.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410595/long-nose-pliers_t4yk8o.jpg'],
         stock: 35,
         featured: false,
         tags: ['pliers', 'long-nose'],
@@ -666,23 +445,38 @@ const products = [
         }
     },
     {
-        name: 'Side Cutter',
-        slug: 'side-cutter',
-        description: 'Professional side cutter for cutting wires.',
-        price: 600,
+        name: 'Ball Pein Hammer',
+        slug: 'ball-pein-hammer',
+        description: 'Professional ball pein hammer for engineering work.',
+        price: 500,
         category: 'Hand Tools',
-        images: [getImage('hand-tools', 'side-cutter.jpg')],
-        stock: 40,
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413548/ball-pein-hammer_w0g9ck.jpg'],
+        stock: 30,
         featured: false,
-        tags: ['cutter', 'wire'],
+        tags: ['hammer', 'ball-pein'],
         specifications: {
-            'Length': '150mm',
-            'Material': 'Steel'
+            'Weight': '0.75kg',
+            'Material': 'Steel + Wood'
+        }
+    },
+    {
+        name: 'Tack Hammer',
+        slug: 'tack-hammer',
+        description: 'Professional tack hammer for workshop use.',
+        price: 400,
+        category: 'Hand Tools',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410602/tack-hammer_qj2teb.jpg'],
+        stock: 35,
+        featured: false,
+        tags: ['hammer', 'tack'],
+        specifications: {
+            'Weight': '0.5kg',
+            'Material': 'Steel + Wood'
         }
     },
 
     // ============================================
-    // 5. ELECTRICAL TOOLS (5)
+    // ELECTRICAL TOOLS
     // ============================================
     {
         name: 'Digital Multimeter DT9605',
@@ -690,7 +484,7 @@ const products = [
         description: 'Professional digital multimeter for electrical testing.',
         price: 2500,
         category: 'Electrical Tools',
-        images: [getImage('electrical', 'digital-multimeter-dt9605.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785421085/digital-multimeter_dptslc.jpg'],
         stock: 25,
         featured: true,
         tags: ['multimeter', 'digital', 'testing'],
@@ -700,26 +494,12 @@ const products = [
         }
     },
     {
-        name: 'Soldering Gun',
-        slug: 'soldering-gun',
-        description: 'Professional soldering gun for electronics work.',
-        price: 1200,
-        category: 'Electrical Tools',
-        images: [getImage('electrical', 'soldering-gun.jpg')],
-        stock: 30,
-        featured: false,
-        tags: ['soldering', 'electronics'],
-        specifications: {
-            'Power': '40W'
-        }
-    },
-    {
         name: 'Solder Sucker',
         slug: 'solder-sucker',
         description: 'Professional solder sucker for removing solder.',
         price: 450,
         category: 'Electrical Tools',
-        images: [getImage('electrical', 'solder-sucker.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785412959/solder-sucker_q44suu.jpg'],
         stock: 35,
         featured: false,
         tags: ['solder', 'removal'],
@@ -728,27 +508,12 @@ const products = [
         }
     },
     {
-        name: 'Electrical Screwdriver Set',
-        slug: 'electrical-screwdriver-set',
-        description: 'Professional insulated screwdriver set.',
-        price: 1500,
-        category: 'Electrical Tools',
-        images: [getImage('electrical', 'electrical-screwdriver-set.jpg')],
-        stock: 25,
-        featured: false,
-        tags: ['screwdriver', 'insulated'],
-        specifications: {
-            'Pieces': '6',
-            'Type': 'Insulated'
-        }
-    },
-    {
         name: 'Cable Stripper',
         slug: 'cable-stripper',
         description: 'Professional cable stripper for wire insulation removal.',
         price: 500,
         category: 'Electrical Tools',
-        images: [getImage('electrical', 'cable-stripper.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410592/cable-stripper_sviur3.jpg'],
         stock: 45,
         featured: false,
         tags: ['cable', 'stripper', 'wire'],
@@ -759,24 +524,8 @@ const products = [
     },
 
     // ============================================
-    // 6. SAFETY EQUIPMENT (10)
+    // SAFETY EQUIPMENT
     // ============================================
-    {
-        name: 'Blue Dust Coat',
-        slug: 'blue-dust-coat',
-        description: 'Professional blue dust coat for lab and workshop. Durable and comfortable.',
-        price: 1400,
-        category: 'Safety Equipment',
-        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785374933/assorted-dust-coats_m0fgd5.jpg'],
-        stock: 40,
-        featured: false,
-        tags: ['dust-coat', 'blue', 'lab'],
-        specifications: {
-            'Color': 'Blue',
-            'Material': 'Cotton',
-            'Sizes': 'S, M, L, XL'
-        }
-    },
     {
         name: 'Cleaning Gloves',
         slug: 'cleaning-gloves',
@@ -878,7 +627,7 @@ const products = [
         description: 'Durable steel-toe safety boots with knicker design. Protective and comfortable.',
         price: 4000,
         category: 'Safety Equipment',
-        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785375241/knicker-safety-boots_xihy6p.png'],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785412355/safety-boots_hz2ahm.jpg'],
         stock: 20,
         featured: false,
         tags: ['safety', 'boots', 'steel-toe', 'knicker'],
@@ -918,23 +667,279 @@ const products = [
             'Type': 'Safety Gloves'
         }
     },
+    {
+        name: 'Safety Goggles',
+        slug: 'safety-goggles',
+        description: 'Protective safety goggles for lab and workshop.',
+        price: 500,
+        category: 'Safety Equipment',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785376474/safety-goggles_whwno5.jpg'],
+        stock: 50,
+        featured: false,
+        tags: ['goggles', 'safety'],
+        specifications: {
+            'Material': 'Plastic',
+            'Protection': 'Impact/UV'
+        }
+    },
 
     // ============================================
-    // 7. STATIONERY & OFFICE SUPPLIES (2)
+    // STATIONERY & OFFICE SUPPLIES
     // ============================================
     {
-        name: 'Mechanical Pencil',
-        slug: 'mechanical-pencil',
-        description: 'Professional mechanical pencil with 0.5mm leads.',
+        name: 'Technical Drawing Pen',
+        slug: 'technical-drawing-pen',
+        description: 'Precision technical drawing pen for fine line work.',
         price: 350,
         category: 'Stationery & Office Supplies',
-        images: [getImage('stationery', 'mechanical-pencil.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413732/technical-drawing-pen_qf6pck.jpg'],
+        stock: 40,
+        featured: false,
+        tags: ['pen', 'drawing', 'technical'],
+        specifications: {
+            'Tip Size': '0.3mm',
+            'Type': 'Technical Pen'
+        }
+    },
+    {
+        name: 'Highlighter Set',
+        slug: 'highlighter-set',
+        description: 'Bright fluorescent highlighters for marking important text.',
+        price: 300,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413583/highlighter_izdlgd.jpg'],
+        stock: 60,
+        featured: false,
+        tags: ['highlighter', 'marker'],
+        specifications: {
+            'Pack Size': '6',
+            'Colors': 'Assorted'
+        }
+    },
+    {
+        name: 'Oxford Geometrical Set',
+        slug: 'oxford-geometrical-set',
+        description: 'Professional geometry set for mathematics and technical drawing.',
+        price: 450,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410865/oxford-geometrical-set_rqxynp.jpg'],
+        stock: 50,
+        featured: false,
+        tags: ['geometry', 'set', 'oxford'],
+        specifications: {
+            'Includes': 'Ruler, Protractor, Compass',
+            'Material': 'Plastic'
+        }
+    },
+    {
+        name: 'Classmate Clear Geometrical Set',
+        slug: 'classmate-clear-geometrical-set',
+        description: 'Clear plastic geometry set with essential drawing tools.',
+        price: 350,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410845/classmate-clear-geometrical-set_oqfqi2.jpg'],
+        stock: 60,
+        featured: false,
+        tags: ['geometry', 'clear', 'set'],
+        specifications: {
+            'Includes': 'Ruler, Protractor, Compass',
+            'Material': 'Clear Plastic'
+        }
+    },
+    {
+        name: 'Wood Glue',
+        slug: 'wood-glue',
+        description: 'Strong wood glue for woodworking and repairs.',
+        price: 200,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410673/wood-glue_fzm7fw.jpg'],
+        stock: 40,
+        featured: false,
+        tags: ['glue', 'wood', 'adhesive'],
+        specifications: {
+            'Size': '100ml',
+            'Type': 'Wood Glue'
+        }
+    },
+    {
+        name: 'HB Pencils (Pack)',
+        slug: 'hb-pencils-pack',
+        description: 'High-quality HB pencils for everyday writing and drawing.',
+        price: 150,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410234/hb-pencils_j7nszz.jpg'],
         stock: 100,
         featured: false,
-        tags: ['pencil', 'mechanical'],
+        tags: ['pencils', 'hb', 'writing'],
         specifications: {
-            'Lead Size': '0.5mm',
-            'Material': 'Metal Barrel'
+            'Pack Size': '12',
+            'Grade': 'HB'
+        }
+    },
+    {
+        name: 'Duct Tape',
+        slug: 'duct-tape',
+        description: 'Heavy-duty duct tape for repairs and projects.',
+        price: 350,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410193/duck-tape_bjrug4.jpg'],
+        stock: 40,
+        featured: false,
+        tags: ['tape', 'duct', 'heavy-duty'],
+        specifications: {
+            'Length': '50m',
+            'Width': '50mm'
+        }
+    },
+    {
+        name: 'Compressed Charcoal Stick Set',
+        slug: 'compressed-charcoal-stick-set',
+        description: 'Professional compressed charcoal sticks for art and sketching.',
+        price: 250,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410109/compressed-charcoal-stick-set_c6iwzc.jpg'],
+        stock: 30,
+        featured: false,
+        tags: ['charcoal', 'art', 'sketching'],
+        specifications: {
+            'Pack Size': '12',
+            'Type': 'Compressed Charcoal'
+        }
+    },
+    {
+        name: 'Araldite Adhesive',
+        slug: 'araldite-adhesive',
+        description: 'Strong two-part epoxy adhesive for heavy-duty bonding.',
+        price: 450,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410100/araldite-adhesive_e8xdmn.jpg'],
+        stock: 30,
+        featured: false,
+        tags: ['araldite', 'adhesive', 'epoxy'],
+        specifications: {
+            'Size': '35ml',
+            'Type': 'Epoxy'
+        }
+    },
+    {
+        name: 'All Purpose Adhesive',
+        slug: 'all-purpose-adhesive',
+        description: 'Versatile all-purpose adhesive for various materials.',
+        price: 180,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410093/all-purpose-adhesive_maoudt.jpg'],
+        stock: 50,
+        featured: false,
+        tags: ['adhesive', 'glue', 'all-purpose'],
+        specifications: {
+            'Size': '50ml',
+            'Type': 'General Purpose'
+        }
+    },
+    {
+        name: 'A4 Hardcover Books',
+        slug: 'a4-hardcover-books',
+        description: 'High-quality A4 hardcover notebooks for note-taking.',
+        price: 450,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410070/a4-hardcover-books_myvkpi.jpg'],
+        stock: 50,
+        featured: false,
+        tags: ['notebook', 'hardcover', 'a4'],
+        specifications: {
+            'Size': 'A4',
+            'Pages': '200',
+            'Binding': 'Hardcover'
+        }
+    },
+    {
+        name: 'A4 Brown Envelops (Pack)',
+        slug: 'a4-brown-envelops',
+        description: 'Durable A4 brown envelopes for mailing and filing.',
+        price: 200,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410061/a4-brown-envelops_psimeo.jpg'],
+        stock: 80,
+        featured: false,
+        tags: ['envelops', 'a4', 'brown'],
+        specifications: {
+            'Pack Size': '10',
+            'Size': 'A4'
+        }
+    },
+    {
+        name: 'Whiteboard Marker Set',
+        slug: 'whiteboard-marker-set',
+        description: 'Dry erase markers for whiteboards. Easy to erase and long-lasting.',
+        price: 350,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785409766/whiteboard-maker_scbqap.jpg'],
+        stock: 40,
+        featured: false,
+        tags: ['whiteboard', 'marker', 'dry-erase'],
+        specifications: {
+            'Pack Size': '4',
+            'Colors': 'Assorted'
+        }
+    },
+    {
+        name: 'Super Glue',
+        slug: 'super-glue',
+        description: 'Strong instant adhesive for quick repairs and bonding.',
+        price: 150,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785409763/super-glue_jc4oyy.jpg'],
+        stock: 80,
+        featured: false,
+        tags: ['glue', 'super', 'adhesive'],
+        specifications: {
+            'Size': '20ml',
+            'Type': 'Cyanoacrylate'
+        }
+    },
+    {
+        name: 'Office Glue',
+        slug: 'office-glue',
+        description: 'Reliable office glue for paper and light bonding.',
+        price: 120,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785409754/office-glue_os7f4s.jpg'],
+        stock: 100,
+        featured: false,
+        tags: ['glue', 'office', 'adhesive'],
+        specifications: {
+            'Size': '50ml',
+            'Type': 'PVA'
+        }
+    },
+    {
+        name: 'Nataraj Erasers (Pack)',
+        slug: 'nataraj-erasers-pack',
+        description: 'High-quality erasers that cleanly remove pencil marks without smudging.',
+        price: 150,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785409751/nataraj-erasers_xe5fda.jpg'],
+        stock: 150,
+        featured: false,
+        tags: ['eraser', 'nataraj', 'stationery'],
+        specifications: {
+            'Pack Size': '5',
+            'Type': 'Soft Eraser'
+        }
+    },
+    {
+        name: 'Lithium Battery CR2032',
+        slug: 'lithium-battery-cr2032',
+        description: 'High-performance lithium battery for calculators and electronic devices.',
+        price: 100,
+        category: 'Stationery & Office Supplies',
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785409748/lithium-battery_dpj24s.jpg'],
+        stock: 150,
+        featured: false,
+        tags: ['battery', 'lithium', 'cr2032'],
+        specifications: {
+            'Type': 'CR2032',
+            'Voltage': '3V'
         }
     },
     {
@@ -943,7 +948,7 @@ const products = [
         description: 'Essential reference book with advanced mathematical tables.',
         price: 650,
         category: 'Stationery & Office Supplies',
-        images: [getImage('stationery', 'smp-advanced-tables.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785413173/smp-advanced-tables_ejv1qj.jpg'],
         stock: 30,
         featured: false,
         tags: ['tables', 'reference'],
@@ -954,7 +959,7 @@ const products = [
     },
 
     // ============================================
-    // 8. TEXTBOOKS & REFERENCE (2)
+    // TEXTBOOKS & REFERENCE
     // ============================================
     {
         name: 'Engineering Mathematics — K.A. Stroud',
@@ -962,7 +967,7 @@ const products = [
         description: 'Comprehensive engineering mathematics textbook by K.A. Stroud.',
         price: 4500,
         category: 'Textbooks & Reference',
-        images: [getImage('textbooks', 'engineering-mathematics-stroud.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410818/engineering-drawing-set_tb2nzd.jpg'],
         stock: 20,
         featured: true,
         tags: ['textbook', 'mathematics', 'stroud'],
@@ -978,7 +983,7 @@ const products = [
         description: 'Comprehensive engineering mathematics textbook by John Bird.',
         price: 4000,
         category: 'Textbooks & Reference',
-        images: [getImage('textbooks', 'engineering-mathematics-bird.jpg')],
+        images: ['https://res.cloudinary.com/gaovndvn/image/upload/v1785410818/engineering-drawing-set_tb2nzd.jpg'],
         stock: 20,
         featured: false,
         tags: ['textbook', 'mathematics', 'bird'],

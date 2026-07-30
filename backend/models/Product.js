@@ -8,14 +8,15 @@ const productSchema = new mongoose.Schema({
     category: {
         type: String,
         enum: [
+            'Engineering Drawing Equipment',
             'Scientific Calculators',
-            'Engineering & Drawing',
-            'Writing Instruments',
-            'Notebooks & Books',
-            'Laboratory Supplies',
+            'Measuring Instruments',
+            'Hand Tools',
+            'Electrical Tools',
             'Safety Equipment',
-            'Mathematics Equipment',
-            'Exam Essentials'
+            'Stationery & Office Supplies',
+            'Art & Drafting Supplies',
+            'Textbooks & Reference'
         ],
         required: true
     },

@@ -23,10 +23,10 @@ const Products = () => {
     const categoryFilter = searchParams.get('category') || 'All';
     const courseFilter = searchParams.get('course') || 'All Courses';
 
-    const categories = [
+   const categories = [
     'All',
-    'Scientific Calculators',
     'Engineering Drawing Equipment',
+    'Scientific Calculators',
     'Measuring Instruments',
     'Hand Tools',
     'Electrical Tools',
