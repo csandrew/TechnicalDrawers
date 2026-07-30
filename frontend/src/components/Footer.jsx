@@ -79,11 +79,11 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-2 text-gray-400">
                                 <i className="fas fa-envelope text-gray-400"></i>
-                                <a href="mailto:info@technicaldrawers.co.ke" className="hover:text-accent transition">info@technicaldrawers.co.ke</a>
+                                <a href="mailto:info@technicaldrawers.co.ke" className="hover:text-accent transition">drawerstechnical@gmail.com</a>
                             </li>
                             <li className="flex items-center gap-2 text-gray-400">
                                 <i className="fas fa-phone-alt text-gray-400"></i>
-                                <a href="tel:+254700000000" className="hover:text-accent transition">+254 700 000 000</a>
+                                <a href="tel:+254700000000" className="hover:text-accent transition">+254 795 011 225</a>
                             </li>
                         </ul>
                     </div>
@@ -99,7 +99,7 @@ const Footer = () => {
                                 const email = e.target.querySelector('input').value;
                                 if (email) {
                                     window.open(
-                                        `https://wa.me/254700000000?text=Hello%20Technical%20Drawers%2C%20I'd%20like%20to%20subscribe%20to%20your%20newsletter.%20My%20email%20is%20${encodeURIComponent(email)}`,
+                                        `https://wa.me/+254795011225?text=Hello%20Technical%20Drawers%2C%20I'd%20like%20to%20subscribe%20to%20your%20newsletter.%20My%20email%20is%20${encodeURIComponent(email)}`,
                                         '_blank'
                                     );
                                     e.target.querySelector('input').value = '';

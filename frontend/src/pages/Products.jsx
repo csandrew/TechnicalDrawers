@@ -23,35 +23,18 @@ const Products = () => {
     const categoryFilter = searchParams.get('category') || 'All';
     const courseFilter = searchParams.get('course') || 'All Courses';
 
-    // Course list
-    const allCourses = [
-        'All Courses',
-        'Aeronautical Engineering',
-        'Civil Engineering',
-        'Chemical & Petroleum Engineering',
-        'Geospatial Engineering',
-        'Mechanical Engineering',
-        'Automotive Engineering',
-        'Electrical & Electronics Engineering',
-        'Mechatronics Engineering',
-        'Quantity Survey',
-        'Building Construction Technology',
-        'Construction Management',
-        'Urban & Regional Planning',
-        'Architecture & Architectural Studies'
-    ];
-
-    const allCategories = [
-        'All',
-        'Scientific Calculators',
-        'Engineering & Drawing',
-        'Writing Instruments',
-        'Notebooks & Books',
-        'Laboratory Supplies',
-        'Safety Equipment',
-        'Mathematics Equipment',
-        'Exam Essentials'
-    ];
+    const categories = [
+    'All',
+    'Scientific Calculators',
+    'Engineering Drawing Equipment',
+    'Measuring Instruments',
+    'Hand Tools',
+    'Electrical Tools',
+    'Safety Equipment',
+    'Stationery & Office Supplies',
+    'Art & Drafting Supplies',
+    'Textbooks & Reference'
+];
 
     // Show only first 4 on mobile unless expanded
     const getVisibleCourses = () => {

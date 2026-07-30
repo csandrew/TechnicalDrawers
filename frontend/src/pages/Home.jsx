@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -10,23 +11,6 @@ const Home = () => {
     const [activeSlide, setActiveSlide] = useState(0);
     const { addToCart } = useCart();
 
-    const courses = [
-        { name: 'Aeronautical Engineering', icon: 'fa-plane' },
-        { name: 'Civil Engineering', icon: 'fa-building' },
-        { name: 'Chemical & Petroleum Engineering', icon: 'fa-flask' },
-        { name: 'Geospatial Engineering', icon: 'fa-globe-africa' },
-        { name: 'Mechanical Engineering', icon: 'fa-cogs' },
-        { name: 'Automotive Engineering', icon: 'fa-car' },
-        { name: 'Electrical & Electronics Engineering', icon: 'fa-car' },
-        { name: 'Mechatronics Engineering', icon: 'fa-microchip' },
-        { name: 'Quantity Survey', icon: 'fa-ruler-combined' },
-        { name: 'Building Construction Technology', icon: 'fa-hard-hat' },
-        { name: 'Construction Management', icon: 'fa-clipboard-list' },
-        { name: 'Urban & Regional Planning', icon: 'fa-city' },
-        { name: 'Architecture & Architectural Studies ', icon: 'fa-drafting-compass' }
-
-    ];
-
     const slides = [
         {
             id: 0,
@@ -35,10 +19,10 @@ const Home = () => {
             bgColor: 'from-blue-900 to-indigo-700',
             buttonText: 'Shop Now →',
             buttonLink: '/products',
-            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784696201/drawingset-removebg-preview_itjg1i.png',
+            image: 'https://res.cloudinary.com/gaovndvn/image/upload/v1785376702/hero-2_siytm2.png',
             features: [
-                { name: '9-Piece Complete Set', price: 'KES 1,200' },
-                { name: 'Precision Compass & Divider', price: 'Included' }
+                { name: '9-Piece Complete Set' },
+                { name: 'Precision Compass & Divider' }
             ],
             description: 'Every engineering student needs a reliable drawing set. Our 9-piece collection includes everything from compass to pencil holder.'
         },
@@ -49,10 +33,10 @@ const Home = () => {
             bgColor: 'from-red-900 to-orange-700',
             buttonText: 'Shop Now →',
             buttonLink: '/products',
-            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784695848/soldier-safety-boots-removebg-preview_ia52mn.png',
+            image: 'https://res.cloudinary.com/gaovndvn/image/upload/v1785376700/hero-1_rpoefs.png',
             features: [
-                { name: 'Steel Toe Protection', salePrice: 'KES 2,250' },
-                { name: 'Anti-Slip Sole', price: 'Safety First' }
+                { name: 'Steel Toe Protection' },
+                { name: 'Anti-Slip Sole' }
             ],
             description: 'Lab sessions and workshops demand proper protection. Our steel-toe safety boots keep you safe while you learn.',
             timer: true
@@ -64,7 +48,7 @@ const Home = () => {
             bgColor: 'from-purple-900 to-pink-700',
             buttonText: 'Shop Now →',
             buttonLink: '/products',
-            image: 'https://res.cloudinary.com/j2zcgbug/image/upload/v1784695847/assorted-dustcoat-removebg-preview_k8tc4t.png',
+            image: 'https://res.cloudinary.com/gaovndvn/image/upload/v1785376704/hero-3_zlgqyk.png',
             features: [
                 { name: '100% Comfort', icon: 'fa-gem' },
                 { name: 'Durable & Washable', icon: 'fa-shield-alt' }
@@ -149,16 +133,6 @@ const Home = () => {
                                                     ) : (
                                                         <div>
                                                             <p className="text-white font-semibold text-xs md:text-sm">{item.name}</p>
-                                                            <div className="flex items-center gap-2">
-                                                                {item.salePrice ? (
-                                                                    <>
-                                                                        <span className="text-white/60 line-through text-xs md:text-sm">{item.price}</span>
-                                                                        <span className="text-yellow-300 font-bold text-xs md:text-sm">{item.salePrice}</span>
-                                                                    </>
-                                                                ) : (
-                                                                    <span className="text-white/80 text-xs md:text-sm">{item.price}</span>
-                                                                )}
-                                                            </div>
                                                         </div>
                                                     )}
                                                 </div>
@@ -196,8 +170,6 @@ const Home = () => {
                 </div>
             </section>
 
-            
-
             {/* Featured Products */}
             <section className="py-12 md:py-16 bg-slate-200">
                 <div className="container mx-auto px-4">
@@ -224,41 +196,6 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
-
-
-            {/* Shop by Course Section */}
-            <section className="py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-2xl md:text-2xl font-extrabold text-secondary mb-4 ">
-                            Shop by Your Course
-                        </h2>
-                        <p className="text-text-light mt-2 max-w-2xl mx-auto">
-                            Find exactly what you need for your studies. Browse equipment and supplies recommended for your course of study.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-3">
-                        {courses.map((course) => (
-                            <Link
-                                key={course.name}
-                                to={`/products?course=${encodeURIComponent(course.name)}`}
-                                className="bg-slate-100 hover:bg-slate-200 rounded-lg p-2.5 md:p-3 text-center transition-all hover:scale-105 hover:shadow-md group"
-                            >
-                                {/* Icon - Smaller */}
-                                <div className="text-xl md:text-2xl text-primary mb-1 group-hover:scale-110 transition-transform">
-                                    <i className={`fas ${course.icon}`}></i>
-                                </div>
-                                {/* Course Name - Smaller */}
-                                <h3 className="font-semibold text-primary text-xs md:text-sm">
-                                    {course.name}
-                                </h3>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            
         </>
     );
 };
