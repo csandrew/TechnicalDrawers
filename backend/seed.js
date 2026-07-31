@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Product = require('./src/models/Product');
+const Product = require('./models/Product');
 
 // ============================================
 // CLOUDINARY BASE URL
